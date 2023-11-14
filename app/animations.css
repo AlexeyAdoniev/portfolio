@@ -1,0 +1,42 @@
+@keyframes bot_border_in {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes bot_border_out {
+  0% {
+    left: 0%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes shake {
+  10%,
+  80% {
+    transform: translate3d(1.5px, 0, 0);
+  }
+
+  50%
+  /*80%*/ {
+    transform: translate3d(-1.5px, 0, 0);
+  }
+
+  /*30%,
+  50%,
+  70% {
+    transform: translate3d(-2px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(2px, 0, 0);
+  }*/
+}

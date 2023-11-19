@@ -75,12 +75,14 @@ nav ul li:hover span {
   opacity: 1;
 }
 
-.board {
-  border: 1px solid rgba(255, 255, 255, 0.233);
+.main-border {
+  border: 1px solid rgba(255, 255, 255, 0.123);
   border-radius: 12px;
+}
+
+.board {
   background: var(--main-bg-color);
   padding: 5px;
-  cursor: pointer;
 }
 
 .board-content {
@@ -181,4 +183,94 @@ p {
 
 .board-content_text a:hover img {
   margin-left: 20px;
+}
+
+.board-content_interactive {
+  display: flex;
+}
+
+.interactive-menu {
+  width: 95%;
+  height: 80%;
+  background: rgb(22, 22, 22);
+  margin: auto;
+  margin-left: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.interactive-menu_sidebar {
+  width: 40%;
+  background: var(--main-bg-color);
+  border-right: 1px solid rgba(255, 255, 255, 0.123);
+  position: relative;
+  z-index: 0;
+}
+
+.interactive-menu_sidebar .glare {
+  z-index: 1;
+  position: absolute;
+  top: -20px;
+  left: -80px;
+  width: 150px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 40px 20px rgba(255, 255, 255, 0.07),
+    /* inner white */ 0 0 100px 60px rgba(255, 255, 255, 0.02),
+    /* middle magenta */ 0 0 170px 100px rgba(255, 255, 255, 0.01); /* outer cyan */
+  transform: rotate(45deg);
+}
+
+.interactive-menu_sidebar ul {
+  padding: 70px 10px 50px 10px;
+}
+
+.interactive-menu_sidebar ul li {
+  display: flex;
+  align-items: center;
+  padding: 8px 0 8px 7px;
+}
+
+.interactive-menu_sidebar ul li span {
+  font-size: 14px;
+  color: var(--dim-text);
+  margin: 0 5px;
+  transition: color 0.4s ease-in;
+}
+
+.interactive-menu_sidebar ul li:hover span {
+  color: var(--main-font-color);
+}
+
+.interactive-menu_sidebar .menu_button {
+  width: 28px;
+  height: 28px;
+  background: url(../public/img/menu-btn.png) no-repeat;
+  background-size: cover;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.interactive-menu_sidebar li.menu-item.active {
+  background: url(../public/img/long-menu-btn.png) no-repeat;
+  background-size: 98% 100%;
+}
+
+.interactive-menu_sidebar li.menu-item.active .menu_button {
+  background: var(--accent);
+  border-radius: 7.5px;
+}
+
+.interactive-menu_content {
+  padding-top: 30px;
+}
+
+.signatureWrapper {
+  width: 100%;
+  background-color: rgb(49, 48, 48);
+  cursor: url(../public/img/pen.png), auto;
 }

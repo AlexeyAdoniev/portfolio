@@ -1,12 +1,14 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { menuItems } from '@/services/store';
 import { Signature } from './signature';
+import Snake from './snake'
 
 
 const components = {
-    [menuItems.SIGNATURE]: Signature
+    [menuItems.SIGNATURE]: Signature,
+    [menuItems.SNAKE]: Snake
 }
 
 const EMPTY_RENDER = () => ''

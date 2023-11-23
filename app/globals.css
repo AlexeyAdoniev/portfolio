@@ -230,12 +230,13 @@ p {
   display: flex;
   align-items: center;
   padding: 8px 0 8px 7px;
+  cursor: pointer;
 }
 
 .interactive-menu_sidebar ul li span {
   font-size: 14px;
   color: var(--dim-text);
-  margin: 0 5px;
+  margin-left: 11px;
   transition: color 0.4s ease-in;
 }
 
@@ -267,10 +268,61 @@ p {
 
 .interactive-menu_content {
   padding-top: 30px;
+  flex: 1;
 }
 
 .signatureWrapper {
-  width: 100%;
-  background-color: rgb(49, 48, 48);
+  width: 90%;
+  margin: 40px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.signatureWrapper canvas {
+  background-color: rgb(31, 30, 30) !important;
+
   cursor: url(../public/img/pen.png), auto;
+}
+
+.signatureWrapper .controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.signatureWrapper button {
+  background: rgba(255, 255, 255, 0.2);
+  width: 45%;
+  border-radius: 7px;
+  border: none;
+  outline: 0;
+  cursor: pointer;
+  padding: 0.7em 3em;
+  color: white;
+  font-family: inherit;
+  transition: all 0.3s;
+}
+
+.signatureWrapper button:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.signed-user {
+  border-radius: 50%;
+  float: right;
+  background: red;
+  width: 35px;
+  height: 35px;
+  padding: 2px;
+}
+
+.snakeWrapper {
+  display: flex;
+}
+
+.snakeWrapper canvas {
+  margin: auto;
+  background: rgba(255, 255, 255, 0.842);
+  border-radius: 5px;
 }

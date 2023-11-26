@@ -5,14 +5,12 @@ const Snake = ({ serviceContainer }) => {
     const { _snake } = serviceContainer
 
     let container = useRef(null)
-
-
-
     useEffect(() => {
+        let snake;
         let keyHandler;
         const tm = setTimeout(() => {
-            const rectangle = container.current.getBoundingClientRect();
-            const snake = _snake.init({ size: rectangle.width * .9 });
+            //const rectangle = container.current.getBoundingClientRect();
+            snake = _snake.init({ size: 300 });
             container.current.append(snake.canvas());
             snake.start()
             keyHandler = (e) => snake.input(e)
@@ -22,19 +20,15 @@ const Snake = ({ serviceContainer }) => {
 
 
         return () => {
+            snake?.stop()
             window.removeEventListener("keydown", keyHandler);
             clearTimeout(tm)
         }
     }, [])
 
-
-
-
     return <div className="snakeWrapper" ref={container}>
-
     </div>
 }
-
 
 export default withServices(Snake)
 

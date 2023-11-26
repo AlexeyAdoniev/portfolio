@@ -12,7 +12,7 @@ import { HeaderMenu } from "@/components/header/header-menu";
 import { MenuContent } from "./menu-content";
 
 import { ServiceProvider } from "@/components/hocs/serviceProvider";
-import { init } from "@/services/sanke";
+import { init } from "@/services/snake";
 
 const montserrat = Montserrat({ subsets: ["cyrillic"], weight: "700" });
 

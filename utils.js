@@ -6,3 +6,13 @@ export const getRandomInt = (N, M) => {
   const multipleOfM = Math.floor(randomValue / M) * M;
   return multipleOfM;
 };
+
+export function rejectWindowScroll(e) {
+  if (
+    ["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(
+      e.code
+    ) > -1
+  ) {
+    e.preventDefault();
+  }
+}

@@ -291,7 +291,11 @@ p {
   margin-top: 30px;
 }
 
-.signatureWrapper button {
+button {
+  font-family: inherit;
+}
+
+/*.signatureWrapper button {
   background: rgba(255, 255, 255, 0.2);
   width: 45%;
   border-radius: 7px;
@@ -300,13 +304,12 @@ p {
   cursor: pointer;
   padding: 0.7em 3em;
   color: white;
-  font-family: inherit;
   transition: all 0.3s;
 }
 
 .signatureWrapper button:hover {
   background: rgba(255, 255, 255, 0.4);
-}
+}*/
 
 .signed-user {
   border-radius: 50%;
@@ -323,6 +326,60 @@ p {
 
 .snakeWrapper canvas {
   margin: auto;
-  background: rgba(255, 255, 255, 0.842);
-  border-radius: 5px;
+  background: rgb(204, 204, 230);
+  border-radius: 2px;
+}
+
+.snake-controls {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.snake-controls button,
+.signatureWrapper button {
+  background: transparent;
+  border: 1px solid rgb(204, 204, 230);
+  color: rgb(204, 204, 230);
+  padding: 7px 15px;
+  cursor: pointer;
+  margin: auto;
+  transition: all 1s ease;
+  text-transform: uppercase;
+}
+
+.snake-controls button:hover,
+.signatureWrapper button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.snake-controls .arrows {
+  padding-top: 20px;
+  margin: auto;
+}
+
+.snake-controls .arrows img {
+  width: 55px;
+  margin: auto;
+}
+
+.snake-controls .arrows > div {
+  display: flex;
+  width: 180px;
+}
+
+.snake-controls .arrows .top {
+  margin-bottom: 5px;
+}
+
+.snake-controls .arrows .bot img:nth-child(1) {
+  transform: rotate(-90deg);
+}
+
+.snake-controls .arrows .bot img:nth-child(2) {
+  transform: rotate(180deg);
+}
+
+.snake-controls .arrows .bot img:nth-child(3) {
+  transform: rotate(90deg);
 }

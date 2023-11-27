@@ -31,9 +31,14 @@ class Arena {
     this.ctx.fillStyle = "black";
   }
 
+  clear() {
+    const ctx = this.canvas.getContext("2d");
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+
   inputHandler = (code) => {
     const direction = CONTROLS[code];
-    this.snake.turn(direction);
+    this.snake?.turn(direction);
   };
 
   listen_render(entity) {
@@ -68,7 +73,7 @@ class Arena {
       const foodCollision = x === this.food.x && y === this.food.y;
       if (foodCollision) {
         snake.grow(x, y);
-        const food = new Food(size, this.snake.pixel);
+        const food = new Food(size, this.snake);
         this.listen_render(food);
         food.render();
         this.food = food;
@@ -131,19 +136,49 @@ class Snake extends EventTarget {
   turn = (direction) => {
     switch (this.direction) {
       case directions.RIGHT: {
-        if (direction === directions.LEFT) return;
+        //speed up
+        if (direction === directions.RIGHT) {
+          this.speed = 2;
+          return;
+        }
+        if (direction === directions.LEFT) {
+          this.speed = 1;
+          return;
+        }
+
         break;
       }
       case directions.DOWN: {
-        if (direction === directions.UP) return;
+        if (direction === directions.DOWN) {
+          this.speed = 2;
+          return;
+        }
+        if (direction === directions.UP) {
+          this.speed = 1;
+          return;
+        }
         break;
       }
       case directions.UP: {
-        if (direction === directions.DOWN) return;
+        if (direction === directions.UP) {
+          this.speed = 2;
+          return;
+        }
+        if (direction === directions.DOWN) {
+          this.speed = 1;
+          return;
+        }
         break;
       }
       case directions.LEFT: {
-        if (direction === directions.RIGHT) return;
+        if (direction === directions.LEFT) {
+          this.speed = 2;
+          return;
+        }
+        if (direction === directions.RIGHT) {
+          this.speed = 1;
+          return;
+        }
         break;
       }
     }
@@ -244,13 +279,28 @@ class Food extends EventTarget {
   y;
   size = 6;
 
-  constructor(size, pixel) {
+  constructor(size, snake) {
     super();
-    this.size = pixel;
-    const x = getRandomInt(size, pixel);
-    const y = getRandomInt(size, pixel);
-    this.x = x; //x % 2 !== 0 ? x - 1 : x;
-    this.y = y; //y % 2 !== 0 ? y - 1 : y;
+    this.size = snake.pixel;
+
+    const createFood = () => {
+      const x = getRandomInt(size, this.size);
+      const y = getRandomInt(size, this.size);
+
+      const snakeCollison = snake.segments.some(
+        (segment) => segment.x === x && segment.y === y
+      );
+      if (snakeCollison) {
+        console.log("food spawn collision");
+        return createFood();
+      }
+      return { x, y };
+    };
+
+    const { x, y } = createFood();
+
+    this.x = x;
+    this.y = y;
   }
 
   position(x = this.x, y = this.y, width = this.size, height = this.size) {
@@ -270,7 +320,7 @@ export const init = ({ size }) => {
   const pixel = size / 50;
   const arena = new Arena(size);
   const snake = new Snake(5, pixel);
-  const food = new Food(size, pixel);
+  const food = new Food(size, snake);
 
   return {
     canvas() {

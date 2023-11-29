@@ -29,9 +29,20 @@ export const Signature = () => {
 
     const signHandler = () => {
         if (signaturePad.current) {
-            const data = getTrimmedSignature(signaturePad.current);
             signaturePad.current.clear()
-            console.log(data);
+
+            fetch('/api/signature', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "*/*"
+                },
+                body: JSON.stringify({ signature: getTrimmedSignature(signaturePad.current) })
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                })
         }
     }
 

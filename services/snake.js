@@ -77,7 +77,6 @@ class Arena {
         this.listen_render(food);
         food.render();
         this.food = food;
-        console.log(snake.segments.length);
       }
     });
 

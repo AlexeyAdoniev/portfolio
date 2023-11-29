@@ -18,14 +18,9 @@ const Snake = ({ serviceContainer }) => {
     let snake = useRef(null);
     let keyHandler = useRef(null)
 
-    const pushHandler = (e) => {
-        setPushed(() => e.code)
-    }
+    const pushHandler = (e) => setPushed(() => e.code)
 
-    const releaseHandler = (e) => {
-        console.log(e)
-        setPushed(() => null)
-    }
+    const releaseHandler = (e) => setPushed(() => null)
 
     const unmount = (tm) => {
         snake.current?.stop();
@@ -61,21 +56,19 @@ const Snake = ({ serviceContainer }) => {
 
 
     const startHandler = () => {
+        if (running) {
+            unmount();
+            mount();
+        }
         setRunning(true)
         snake.current.start();
     }
 
-    const resetHandler = () => {
-        unmount();
-        mount();
-        snake.current.start();
-    }
 
     return <><div className="snakeWrapper" ref={container}>
     </div>
         <div className="snake-controls">
-            {!running && <button onClick={startHandler}>START</button>}
-            {running && <button onClick={resetHandler}>RESTART</button>}
+            <button onClick={startHandler}>{!running ? 'START' : 'RESTART'}</button>
             <div className="arrows">
                 <div className="top">
                     <img src={pushedArrow === 'ArrowUp' ? "/img/key_pushed.png" : "/img/key_idle.png"} alt="idle_top" />

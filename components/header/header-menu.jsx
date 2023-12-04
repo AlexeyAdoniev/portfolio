@@ -24,6 +24,11 @@ const items = [
         />,
         text: 'Play Snake',
         content: menuItems.SNAKE
+    },
+    {
+        icon: () => 'D',
+        text: 'Dfiance',
+        content: menuItems.DEFAULT
     }
 ]
 

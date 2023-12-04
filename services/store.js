@@ -3,6 +3,7 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 export const menuItems = {
   SIGNATURE: "SIGNATURE",
   SNAKE: "SNAKE",
+  DEFAULT: "DEFAULT",
 };
 
 const globalSlice = createSlice({

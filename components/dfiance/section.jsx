@@ -9,11 +9,12 @@ export const Dfiance = () => {
     let container = useRef(null);
 
     useEffect(() => {
+        console.log('render dfiance')
         const mouseHander = (e) => {
             Object.assign(document.documentElement, {
                 style: `
-                    --move-x: ${(e.clientX - window.innerWidth / 2) * -.0013}deg;
-                    --move-y:${(e.clientY - window.innerHeight / 2) * -.0018}deg
+                    --move-x: ${(e.clientX - window.innerWidth / 2) * -.0017}deg;
+                    --move-y:${(e.clientY - window.innerHeight / 2) * -.0022}deg
                 `
             })
         }
@@ -23,6 +24,7 @@ export const Dfiance = () => {
 
 
         return () => {
+            console.log('unmount dfiance')
             document.removeEventListener("mousemove", mouseHander)
         }
     }, [container])
@@ -36,11 +38,20 @@ export const Dfiance = () => {
         <div className="layers__container">
             <div className="layers__item layer-1"></div>
             <div className="layers__item layer-2"></div>
-            <div className="layers__item layer-3"></div>
-            <div className="layers__item layer-4"></div>
-            <div className="layers__item layer-5">
+            <div className="layers__item layer-3">
                 <p>Dfiance is a PVP strategy card game that simulates a clash of two armies on a battlefield</p>
-                <a href="https://dfiance.com/">Visit</a>
+                <div className='item__buttons'>
+                    <a target='_blank' href="https://dfiance.com/">Visit</a>
+                    {/* <button>Stack</button> */}
+                </div>
+
+            </div>
+
+            <div className="layers__item layer-4"></div>
+            <div className="layers__item layer-5"></div>
+            <div className="layers__item layer-6"></div>
+            <div className="layers__item layer-8">
+                <div className="shadow"></div>
             </div>
 
         </div>

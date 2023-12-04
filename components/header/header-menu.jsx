@@ -11,6 +11,16 @@ import { selectMenuItem, menuItems } from '@/services/store';
 
 const items = [
     {
+        icon: () => <Image
+            src="/img/figma.svg"
+            width={14}
+            height={14}
+            alt="svg icon"
+        />,
+        text: 'My Projects',
+        content: menuItems.PROJECTS
+    },
+    {
         icon: () => 'S',
         text: 'Leave a Signature',
         content: menuItems.SIGNATURE

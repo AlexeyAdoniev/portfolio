@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import SignaturePad from 'signature_pad';
 import trimCanvas from 'trim-canvas'
 
+//import { wait } from '@/utils';
+
 
 function getTrimmedSignature(signaturePad) {
     const dublicate = document.createElement('canvas');
@@ -10,6 +12,27 @@ function getTrimmedSignature(signaturePad) {
     dublicate.getContext('2d').drawImage(signaturePad.canvas, 0, 0);
     trimCanvas(dublicate);
     return dublicate.toDataURL();
+}
+
+
+function saveSignature(signaturePad) {
+    return fetch('/api/signature', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "*/*"
+        },
+        body: JSON.stringify({ signature: getTrimmedSignature(signaturePad) })
+    }).then((res) => {
+        if (res.status === 500) {
+            throw new Error(res.status)
+        }
+        return res.json()
+    })
+}
+
+function handleSaved(data) {
+    console.log(data, 'data');
 }
 
 
@@ -29,20 +52,13 @@ export const Signature = () => {
 
     const signHandler = () => {
         if (signaturePad.current) {
-            signaturePad.current.clear()
+            signaturePad.current.clear();
 
-            fetch('/api/signature', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "*/*"
-                },
-                body: JSON.stringify({ signature: getTrimmedSignature(signaturePad.current) })
+            saveSignature(signaturePad.current).then(handleSaved).catch(async () => {
+                //await wait(5000)
+                //saveSignature(signaturePad.current).catch(() => { })
+
             })
-                .then((res) => res.json())
-                .then((data) => {
-                    console.log(data);
-                })
         }
     }
 

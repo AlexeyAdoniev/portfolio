@@ -2,17 +2,20 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux'
 
 import { menuItems } from '@/services/store';
+import { Projects } from './projects';
 import { Signature } from './signature';
 import Snake from './snake'
 import { doScrolling } from '@/utils';
 
 
 const components = {
+    [menuItems.PROJECTS]: Projects,
     [menuItems.SIGNATURE]: Signature,
     [menuItems.SNAKE]: Snake,
     [menuItems.DEFAULT]: () => {
         useEffect(() => {
             const section = document.getElementById("project")
+            if (!section) return;
             const scrollTo = window.scrollY + section.getBoundingClientRect().top
             doScrolling(scrollTo, 2000)
         }, [])

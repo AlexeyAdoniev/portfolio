@@ -15,15 +15,22 @@ export default async function handler(req, res) {
     }
 
     if (req.method === "POST") {
-      client.connect().then(() => {
-        const { signature } = req.body;
-        const collection = client.db(DB_NAME).collection(DB_COLLECTION);
-        const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+      await client.connect().catch((e) => {
+        console.log(e, "post sig error");
+        if (e.code === "EREFUSED") {
+          return void res
+            .status(500)
+            .json({ message: "Mongo server EREFUSED" });
+        }
+      });
 
-        collection.insertOne({
-          ip,
-          signature,
-        });
+      const { signature } = req.body;
+      const collection = client.db(DB_NAME).collection(DB_COLLECTION);
+      const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+
+      collection.insertOne({
+        ip,
+        signature,
       });
 
       res.status(200).json({ message: "ok" });

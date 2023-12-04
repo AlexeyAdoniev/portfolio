@@ -1,6 +1,7 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 export const menuItems = {
+  PROJECTS: "PROJECTS",
   SIGNATURE: "SIGNATURE",
   SNAKE: "SNAKE",
   DEFAULT: "DEFAULT",
@@ -9,7 +10,7 @@ export const menuItems = {
 const globalSlice = createSlice({
   name: "global",
   initialState: {
-    activeMenuItem: menuItems.SIGNATURE,
+    activeMenuItem: menuItems.PROJECTS,
   },
   reducers: {
     selectMenuItem: (state, action) => {

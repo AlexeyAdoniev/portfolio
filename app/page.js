@@ -1,26 +1,23 @@
 import Header from "@/components/header/header";
-import { Dfiance } from "@/components/dfiance/section";
+import ProjectDemo from "@/components/demo";
 
 export default function Home() {
   return (
     <div className="app">
       <Header />
+      <ProjectDemo />
       {false && (
-        <section id="project">
-          <Dfiance />
+        <section style={{ height: "200vh" }}>
+          {false && (
+            <a
+              href="https://www.flaticon.com/free-icons/equipment"
+              title="equipment icons"
+            >
+              Equipment icons created by Firststyles - Flaticon
+            </a>
+          )}
         </section>
       )}
-
-      <section style={{ height: "200vh" }}>
-        {false && (
-          <a
-            href="https://www.flaticon.com/free-icons/equipment"
-            title="equipment icons"
-          >
-            Equipment icons created by Firststyles - Flaticon
-          </a>
-        )}
-      </section>
     </div>
   );
 }

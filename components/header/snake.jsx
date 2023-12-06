@@ -3,7 +3,16 @@ import { withServices } from '../hocs/wtihServices';
 import { rejectWindowScroll } from '@/utils';
 
 
-
+const adaptToScreen = () => {
+    switch (true) {
+        case window.innerWidth < 1600: {
+            return .6
+        }
+        default: {
+            return .7
+        }
+    }
+}
 
 
 const Snake = ({ serviceContainer }) => {
@@ -35,7 +44,7 @@ const Snake = ({ serviceContainer }) => {
     const mount = () => {
         const rectangle = container.current.getBoundingClientRect();
 
-        snake.current = _snake.init({ size: Math.ceil(rectangle.width * .8 / 50) * 50 });
+        snake.current = _snake.init({ size: Math.ceil(rectangle.width * adaptToScreen() / 50) * 50 });
         container.current.append(snake.current.canvas());
         keyHandler.current = (e) => {
             snake.current.input(e);

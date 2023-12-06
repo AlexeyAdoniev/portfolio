@@ -5,12 +5,14 @@
   --dim-text: rgba(255, 255, 255, 0.6);
   --transition: 1s cubic-bezier(0.05, 0.5, 0, 1);
   --base-board: 650px;
+  --project-card: 250px;
 }
 
 body {
   background: var(--main-bg-color);
   color: var(--main-font-color);
   font-size: 18px;
+  overflow: hidden;
   /* overflow-y: hidden;
   overflow-x: hidden; */
 }
@@ -191,7 +193,7 @@ p {
 }
 
 .interactive-menu {
-  width: 95%;
+  width: 100%;
   height: 80%;
   background: rgb(22, 22, 22);
   margin: auto;
@@ -390,7 +392,26 @@ button {
   background: var(--main-bg-color);
   perspective: 500px;
   overflow: hidden;
+  z-index: 0;
+  position: relative;
   backface-visibility: hidden;
+}
+
+.dfiance::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: #000;
+  transition: background-color 2s ease;
+}
+
+.dfiance.visible::after {
+  pointer-events: none;
+  z-index: 0;
+  background-color: transparent;
 }
 
 .layers__container {
@@ -411,13 +432,21 @@ button {
 }
 
 .layers__item.layer-1 {
-  background-image: url(../public/img/dfiance/1-min.png);
+  background-image: none;
   transform: translateZ(-150px) scale(1.28) translateY(2vh);
 }
 
+.layers__item.layer-1.loaded {
+  background-image: url(../public/img/dfiance/1-min.png);
+}
+
 .layers__item.layer-2 {
-  background-image: url(../public/img/dfiance/2-min.png);
+  background-image: none;
   transform: translateZ(70px) scale(0.85);
+}
+
+.layers__item.layer-2.loaded {
+  background-image: url(../public/img/dfiance/1-min.png);
 }
 
 .layers__item.layer-3 {
@@ -518,46 +547,56 @@ button {
   height: 100%;
   justify-content: space-between;
   padding: 0 20px;
+  position: relative;
 }
 
 .projectSelector__imageWrapper {
-  width: 25%;
+  width: 28%;
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  border: 1px solid transparent;
   transition: width 0.15s ease-in-out;
 }
 
 .projectSelector__imageWrapper img {
   position: absolute;
+  z-index: 3;
   top: 0;
   left: 50%;
-  width: 250px;
+  width: var(--project-card);
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
   transform: translate(-50%, 0);
 }
 
 .projectSelector__imageWrapper.hovered {
-  width: 75%;
+  width: calc(var(--project-card) * 0.95);
   position: relative;
-  z-index: 0;
-  /* transform: translateY(-10px); */
+
+  animation: glower 5s linear infinite;
+  z-index: 3;
 }
 
 .projectSelector__imageWrapper.hovered::after {
   content: "";
   position: absolute;
-  z-index: 1;
+  z-index: 5;
   width: 100%;
   height: 100%;
   inset: 0;
   background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.85) 0% 3%,
-    transparent 40% 60%,
-    rgba(0, 0, 0, 0.85) 97% 100%
-  );
+      90deg,
+      rgba(0, 0, 0, 0.8) 0% 3%,
+      transparent 40% 60%,
+      rgba(0, 0, 0, 0.8) 97% 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.8) 0% 3%,
+      transparent 40% 60%,
+      rgba(0, 0, 0, 0.8) 97% 100%
+    );
 }
 
 .projectSelector__imageWrapper.hovered img {
@@ -570,9 +609,15 @@ button {
 
 .projectInfo {
   display: none;
-  padding: 20px;
   font-size: 14px;
   letter-spacing: 1px;
+  position: absolute;
+  width: 100%;
+  height: 200px;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  transform: translateY(100%);
 }
 
 .projectInfo h3 {
@@ -592,7 +637,7 @@ button {
 }
 
 .projectInfo ul li {
-  padding: 3px 0;
+  padding: 4px 0;
 }
 
 .projectInfo ul li span {
@@ -610,9 +655,32 @@ button {
 .letter-by-letter span {
   display: inline-block;
   opacity: 0;
+  white-space: pre;
   /* animation: fadeIn 0.5s ease-out forwards;*/
 }
 
-.letter-by-letter span.afterSlash {
-  color: var(--accent);
+.prodecDescr span {
+  font-size: 12px;
+  margin: 3px 0;
+}
+
+.lds-ripple {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 18;
+  width: 80px;
+  height: 80px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #fff;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
 }

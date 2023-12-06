@@ -1,36 +1,51 @@
-"use client";
-import React, { useEffect, useRef } from 'react';
+
+import React, { useEffect, useRef, useState } from 'react';
+
+import { useSelector } from 'react-redux';
+import classNames from 'classnames';
 
 
+function setCoordinates(x = window.innerWidth / 2, y = window.innerHeight / 2) {
+    Object.assign(document.documentElement, {
+        style: `
+            --move-x: ${(x - window.innerWidth / 2) * -.0017}deg;
+            --move-y:${(y - window.innerHeight / 2) * -.0022}deg
+        `
+    })
+}
 
-
-export const Dfiance = () => {
+const Dfiance = () => {
 
     let container = useRef(null);
+    const [visible, setVisible] = useState(false)
+
+    const transition = useSelector(state => state.global.transition);
 
     useEffect(() => {
+        if (transition) return;
         console.log('render dfiance')
+
         const mouseHander = (e) => {
-            Object.assign(document.documentElement, {
-                style: `
-                    --move-x: ${(e.clientX - window.innerWidth / 2) * -.0017}deg;
-                    --move-y:${(e.clientY - window.innerHeight / 2) * -.0022}deg
-                `
-            })
+
+            setCoordinates(e.clientX, e.clientY)
+
         }
-
-
-        container.current && document.addEventListener("mousemove", mouseHander)
+        if (container.current) {
+            console.log('setting listener')
+            document.addEventListener("mousemove", mouseHander)
+            setCoordinates()
+            setTimeout(() => setVisible(true), 1000)
+        }
 
 
         return () => {
             console.log('unmount dfiance')
             document.removeEventListener("mousemove", mouseHander)
         }
-    }, [container])
+    }, [container, transition])
 
 
-    return <div className='dfiance' ref={(node) => {
+    return <div className={classNames('dfiance', { visible })} ref={(node) => {
         if (node) {
             container.current = node
         }
@@ -55,6 +70,18 @@ export const Dfiance = () => {
             </div>
 
         </div>
+        {!visible && <div className="lds-ripple"><div></div><div></div></div>}
     </div>
 
 }
+
+const lazyImages = [{
+    elementClass: ".layers__item.layer-1",
+    src: "/img/dfiance/1-min.png"
+}, {
+    elementClass: ".layers__item.layer-2",
+    src: "/img/dfiance/2-min.png"
+}]
+
+
+export { Dfiance, lazyImages }

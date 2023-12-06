@@ -7,14 +7,28 @@ export const menuItems = {
   DEFAULT: "DEFAULT",
 };
 
+export const demos = {
+  DFIANCE: "DFIANCE",
+  XP: "XP",
+  EXPLORER: "EXPLORER",
+};
+
 const globalSlice = createSlice({
   name: "global",
   initialState: {
     activeMenuItem: menuItems.PROJECTS,
+    demo: null,
+    transition: false,
   },
   reducers: {
     selectMenuItem: (state, action) => {
       state.activeMenuItem = action.payload;
+    },
+    selectDemo: (state, action) => {
+      state.demo = action.payload;
+    },
+    setTransition: (state, action) => {
+      state.transition = action.payload;
     },
   },
 });
@@ -25,5 +39,6 @@ const store = configureStore({
   },
 });
 
-export const { selectMenuItem } = globalSlice.actions;
+export const { selectMenuItem, selectDemo, setTransition } =
+  globalSlice.actions;
 export default store;

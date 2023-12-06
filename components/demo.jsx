@@ -1,7 +1,8 @@
 "use client"
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 
 import { Dfiance, lazyImages as dfianceLazyImages } from "@/components/dfiance/section";
+import { XP, lazyImages as xpLazyImages } from "@/components/xp/section";
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -12,8 +13,9 @@ import { demos, setTransition } from '@/services/store';
 import { EMPTY_RENDER, doScrolling, preloadImage } from '@/utils';
 
 
-const components = {
-    [demos.DFIANCE]: Dfiance,
+const projects = {
+    [demos.DFIANCE]: { render: Dfiance, lazyLoad: dfianceLazyImages },
+    [demos.XP]: { render: XP, lazyLoad: xpLazyImages },
 }
 
 
@@ -21,30 +23,34 @@ const ProjectDemo = () => {
 
     const dispatch = useDispatch()
 
-    const demo = useSelector(state => state.global.demo);
+    const demo = demos.XP || useSelector(state => state.global.demo)
+    const transition = useSelector(state => state.global.transition);
+    console.log(demo)
+    const project = projects[demo];
+    const Content = useMemo(() => project ? project.render : EMPTY_RENDER, [demo])
 
-    const Content = components[demo] ? React.memo(components[demo]) : EMPTY_RENDER
 
     let container = useRef(null)
 
     useEffect(() => {
-        if (components[demo]) {
+        const project = projects[demo];
+        if (project) {
             const section = container.current;
 
             if (!section) return;
             const scrollTo = window.scrollY + section.getBoundingClientRect().top
-            //wait for biggest images to load
-            Promise.all(dfianceLazyImages.map((item) => preloadImage(item))).then(async () => {
-                await doScrolling(scrollTo, 1200)
-                console.log('done scrolling')
+            doScrolling(scrollTo, 1200)
+            console.log('x')
+            Promise.all(project.lazyLoad.map((item) => preloadImage(item))).then(() => {
                 dispatch(setTransition(false))
             })
+
 
         }
     }, [demo])
 
     return <section id="project" ref={container}>
-        <Content />
+        <Content transition={transition} />
     </section>
 }
 

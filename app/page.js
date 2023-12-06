@@ -4,7 +4,7 @@ import ProjectDemo from "@/components/demo";
 export default function Home() {
   return (
     <div className="app">
-      <Header />
+      {false && <Header />}
       <ProjectDemo />
       {false && (
         <section style={{ height: "200vh" }}>

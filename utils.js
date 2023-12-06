@@ -54,6 +54,7 @@ export const preloadImage = ({ src, elementClass }) =>
     image.onload = function () {
       setTimeout(() => reject(), 15_000);
       const element = document.querySelector(validSelector(elementClass));
+      console.log(element, "element");
       if (!element) resolve(false);
       element.classList.add("loaded");
       resolve(true);

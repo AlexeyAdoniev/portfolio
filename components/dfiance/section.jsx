@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 
-import { useSelector } from 'react-redux';
+
 import classNames from 'classnames';
 
 
@@ -14,12 +14,12 @@ function setCoordinates(x = window.innerWidth / 2, y = window.innerHeight / 2) {
     })
 }
 
-const Dfiance = () => {
+const Dfiance = ({ transition }) => {
 
     let container = useRef(null);
     const [visible, setVisible] = useState(false)
 
-    const transition = useSelector(state => state.global.transition);
+
 
     useEffect(() => {
         if (transition) return;

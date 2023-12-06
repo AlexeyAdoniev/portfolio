@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
-import { Montserrat } from "next/font/google";
 
 import { demos, selectDemo, setTransition } from '@/services/store';
 
 import { useDispatch } from 'react-redux';
 
+import { Montserrat } from "next/font/google";
 const montserratBold = Montserrat({ subsets: ["latin"], weight: "800" });
 
 

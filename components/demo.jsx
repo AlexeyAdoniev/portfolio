@@ -8,10 +8,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import store from "@/services/store";
 import { Provider } from "react-redux";
-import { demos, setTransition } from '@/services/store';
+import { demos, setTransition, selectDemo } from '@/services/store';
 
 import { EMPTY_RENDER, doScrolling, preloadImage } from '@/utils';
 
+
+const SCROLL_DURATION = 1200;
 
 const projects = {
     [demos.DFIANCE]: { render: Dfiance, lazyLoad: dfianceLazyImages },
@@ -23,33 +25,63 @@ const ProjectDemo = () => {
 
     const dispatch = useDispatch()
 
-    const demo = demos.XP || useSelector(state => state.global.demo)
+    const demo = /*demos.XP ||*/ useSelector(state => state.global.demo)
     const transition = useSelector(state => state.global.transition);
-    console.log(demo)
     const project = projects[demo];
     const Content = useMemo(() => project ? project.render : EMPTY_RENDER, [demo])
 
 
     let container = useRef(null)
 
+
+    const exitDemo = () => {
+        const scrollTo = 0;
+        dispatch(setTransition(true))
+        doScrolling(scrollTo, SCROLL_DURATION).then(() => {
+            dispatch(selectDemo(null))
+            dispatch(setTransition(false))
+        })
+    }
+
     useEffect(() => {
+
         const project = projects[demo];
         if (project) {
+
+            const scrollUp = (e) => {
+                if (e.deltaY < 0) {
+                    exitDemo()
+                }
+                //window.removeEventListener("wheel", scrollUp);
+            }
+
             const section = container.current;
 
             if (!section) return;
             const scrollTo = window.scrollY + section.getBoundingClientRect().top
-            doScrolling(scrollTo, 1200)
-            console.log('x')
-            Promise.all(project.lazyLoad.map((item) => preloadImage(item))).then(() => {
+
+            Promise.all([
+                doScrolling(scrollTo, SCROLL_DURATION),
+                Promise.all(project.lazyLoad.map((item) => preloadImage(item)))
+            ]).then(() => {
                 dispatch(setTransition(false))
+                window.addEventListener("wheel", scrollUp)
             })
 
+            return () => {
+
+                window.removeEventListener("wheel", scrollUp)
+            }
 
         }
     }, [demo])
 
     return <section id="project" ref={container}>
+        {demo && !transition && <div class="scroll-up" >
+            <div class="mousey" onClick={exitDemo}>
+                <div class="scroller"></div>
+            </div>
+        </div>}
         <Content transition={transition} />
     </section>
 }

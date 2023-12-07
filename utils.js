@@ -47,16 +47,30 @@ function validSelector(selector) {
   return "." + selector;
 }
 
-export const preloadImage = ({ src, elementClass }) =>
+export const preloadImage = (item) =>
   new Promise((resolve, reject) => {
+    const lazyImage = typeof item === "string";
+    const src = lazyImage ? item : item.src;
+
+    setTimeout(() => reject(), 15_000);
     const image = new Image();
     image.src = src;
     image.onload = function () {
-      setTimeout(() => reject(), 15_000);
-      const element = document.querySelector(validSelector(elementClass));
-      console.log(element, "element");
-      if (!element) resolve(false);
-      element.classList.add("loaded");
+      if (lazyImage) {
+        //const element = document.querySelector(`img[src="${src}"]`);
+        //element.classList.add('lo')
+        // console.log(element);
+        // if (!element) resolve(false);
+        // element.src = src;
+      } else {
+        //lazy background
+        const element = document.querySelector(
+          validSelector(item.elementClass)
+        );
+        if (!element) resolve(false);
+        element.classList.add("loaded");
+      }
+
       resolve(true);
     };
     image.onerror = function () {

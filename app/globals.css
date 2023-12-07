@@ -409,7 +409,7 @@ button {
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: 11;
   background-color: #000;
   transition: background-color 2s ease;
 }
@@ -693,10 +693,16 @@ button {
 }
 
 .xpSection__container {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.xpSection.visible .xpSection__container {
+  opacity: 1;
+  visibility: visible;
   width: 100%;
   height: 100%;
-  background: white;
-
+  background: rgb(255, 255, 255);
   position: relative;
   display: flex;
   align-items: center;
@@ -707,13 +713,6 @@ button {
   user-select: none;
 }
 
-.xpSection__container > h2 a {
-  font-size: calc(var(--index));
-  text-decoration: none;
-  color: blue;
-  cursor: pointer;
-}
-
 .xpSection h2 {
   position: absolute;
   z-index: 19;
@@ -721,14 +720,14 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-size: calc(var(--index) * 2.4);
+  font-size: calc(var(--index) * 1.8);
   text-transform: uppercase;
   transition: color 1s ease;
   letter-spacing: 1.5px;
 }
 
 .xpSection h2 .lds-ripple {
-  transform: translate(-50%, -50%) scale(3);
+  transform: translate(-50%, -50%) scale(2.5);
 }
 
 .xpSection.visible h2 {
@@ -746,11 +745,58 @@ button {
   font-weight: normal;
 }
 
+.xpVisitBtn {
+  text-transform: uppercase;
+  font-size: calc(var(--index) * 0.6);
+  background-color: transparent;
+  border: 2px solid black;
+  color: black;
+  cursor: pointer;
+  padding: 0.7em 1.5em;
+  margin-top: 20px;
+  text-decoration: none;
+  background: white;
+  text-align: center;
+  font-family: inheritm;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  user-select: none;
+  transition: color 150ms ease-in-out;
+}
+
+.xpVisitBtn::after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 100%;
+  background: black;
+  z-index: -1;
+  transition: width 150ms ease-in-out;
+}
+
+.xpVisitBtn:hover:after {
+  width: 110%;
+}
+
+.xpVisitBtn:hover {
+  color: #fff;
+  outline: none;
+}
+
+.xpVisitBtnL:focus {
+  outline: none;
+}
+
 .xpSection .gallery {
   column-width: 2em;
   gap: 0.4em;
   width: 30vw;
-  transform: scale(12);
+  transform: scale(10);
   position: relative;
   z-index: 1;
   will-change: transform;
@@ -763,11 +809,72 @@ button {
 }
 
 .xpSection .gallery__item img {
+  display: none;
   width: 100%;
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
 }
 
+.xpSection.visible .gallery__item img {
+  display: initial;
+}
+
 .xpSection .gallery__item img.intersected {
   opacity: 0;
+}
+
+#project {
+  position: relative;
+}
+
+.scroll-up {
+  z-index: 99999;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 8vw;
+  height: 5vh;
+}
+
+.scroll-up::after {
+  content: "";
+  position: absolute;
+  inset: -55px;
+  transform: translateX(-20%);
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(rgba(0, 0, 0, 0.72), transparent);
+  filter: blur(20px);
+}
+
+.mousey {
+  width: 3px;
+  padding: 10px 15px;
+  height: 35px;
+  border: 2px solid #ffffff;
+  border-radius: 25px;
+  opacity: 0.75;
+  box-sizing: content-box;
+  cursor: pointer;
+}
+.scroller {
+  width: 3px;
+  height: 10px;
+  border-radius: 25%;
+  background-color: #ffffff;
+  animation-name: scroll;
+  animation-duration: 2.2s;
+  animation-timing-function: cubic-bezier(0.15, 0.41, 0.69, 0.94);
+  animation-iteration-count: infinite;
+}
+@keyframes scroll {
+  0% {
+    opacity: 1;
+    transform: translateY(15px);
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 0.2;
+  }
 }

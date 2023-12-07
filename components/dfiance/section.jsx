@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
+import { Loader } from '../loader';
+
 
 function setCoordinates(x = window.innerWidth / 2, y = window.innerHeight / 2) {
     Object.assign(document.documentElement, {
@@ -70,7 +72,7 @@ const Dfiance = ({ transition }) => {
             </div>
 
         </div>
-        {!visible && <div className="lds-ripple"><div></div><div></div></div>}
+        {!visible && <Loader />}
     </div>
 
 }

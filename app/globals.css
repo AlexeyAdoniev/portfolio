@@ -389,7 +389,8 @@ button {
 }
 
 .dfiance,
-.xpSection {
+.xpSection,
+.explorerSection {
   height: 100vh;
   background: var(--main-bg-color);
   position: relative;
@@ -403,7 +404,8 @@ button {
 }
 
 .dfiance::after,
-.xpSection::after {
+.xpSection::after,
+.explorerSection::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -415,7 +417,8 @@ button {
 }
 
 .dfiance.visible::after,
-.xpSection.visible::after {
+.xpSection.visible::after,
+.explorerSection.visible::after {
   pointer-events: none;
   z-index: 0;
   background-color: transparent;
@@ -832,7 +835,7 @@ button {
   position: fixed;
   top: 20px;
   left: 20px;
-  width: 8vw;
+  width: 6vw;
   height: 5vh;
 }
 
@@ -867,14 +870,87 @@ button {
   animation-timing-function: cubic-bezier(0.15, 0.41, 0.69, 0.94);
   animation-iteration-count: infinite;
 }
-@keyframes scroll {
-  0% {
-    opacity: 1;
-    transform: translateY(15px);
-  }
 
-  100% {
-    transform: translateY(0);
-    opacity: 0.2;
-  }
+.explorerSection .scence__contaier,
+.explorerSection .video__container,
+.explorerSection .overlay {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
 }
+
+.explorerSection.visible .scence__contaier,
+.explorerSection.visible .video__container,
+.explorerSection .overlay {
+  visibility: visible;
+  opacity: 1;
+}
+
+.explorerSection .video__container {
+  position: absolute;
+  z-index: 2;
+}
+
+.video__container video {
+  width: 100%;
+  transform: scale(1.28) translateY(-3vh);
+  height: 100%;
+  transition: opacity 0.4s ease;
+}
+
+.scence__contaier .overlay {
+  position: absolute;
+  z-index: 3;
+  cursor: none;
+  transition: all 0.2s ease-in-out;
+  background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.95) 0 var(--tbox-y1),
+      transparent var(--tbox-y1) var(--tbox-y2),
+      rgba(255, 255, 255, 0.95) var(--tbox-y2) 100%
+    ),
+    linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.95) 0 var(--tbox-x1),
+      transparent var(--tbox-x1) var(--tbox-x2),
+      rgba(255, 255, 255, 0.95) var(--tbox-x2) 100%
+    );
+}
+
+.scence__contaier .overlay.full {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.scence__contaier .overlay h4 {
+  position: absolute;
+  z-index: 4;
+  font-size: 30px;
+  top: 40%;
+  transform: translateY(-100%);
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  left: 10vw;
+}
+
+.scence__contaier .overlay a {
+  position: absolute;
+  z-index: 4;
+  top: 43%;
+  transform: translateY(-100%);
+  left: 10vw;
+  cursor: pointer;
+}
+
+/* .seeker {
+  position: absolute;
+  background: transparent;
+  transform: translateZ(-100px);
+  width: 100px;
+  height: 100px;
+  left: 50%;
+  top: 50%;
+} */

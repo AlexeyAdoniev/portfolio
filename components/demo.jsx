@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useMemo } from 'react';
 
 import { Dfiance, lazyImages as dfianceLazyImages } from "@/components/dfiance/section";
 import { XP, lazyImages as xpLazyImages } from "@/components/xp/section";
+import { Explorer, lazyImages as explorerLazyImages } from "@/components/explorer/section";
+
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -18,6 +20,7 @@ const SCROLL_DURATION = 1200;
 const projects = {
     [demos.DFIANCE]: { render: Dfiance, lazyLoad: dfianceLazyImages },
     [demos.XP]: { render: XP, lazyLoad: xpLazyImages },
+    [demos.EXPLORER]: { render: Explorer, lazyLoad: explorerLazyImages },
 }
 
 
@@ -77,9 +80,9 @@ const ProjectDemo = () => {
     }, [demo])
 
     return <section id="project" ref={container}>
-        {demo && !transition && <div class="scroll-up" >
-            <div class="mousey" onClick={exitDemo}>
-                <div class="scroller"></div>
+        {demo && !transition && <div className="scroll-up" >
+            <div className="mousey" onClick={exitDemo}>
+                <div className="scroller"></div>
             </div>
         </div>}
         <Content transition={transition} />

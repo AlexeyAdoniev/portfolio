@@ -84,3 +84,15 @@
     background-position: 400% 0;
   }
 }
+
+@keyframes scroll {
+  0% {
+    opacity: 1;
+    transform: translateY(15px);
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 0.2;
+  }
+}

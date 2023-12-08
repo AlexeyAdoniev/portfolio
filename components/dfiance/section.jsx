@@ -28,10 +28,9 @@ const Dfiance = ({ transition }) => {
         console.log('render dfiance')
 
         const mouseHander = (e) => {
-
             setCoordinates(e.clientX, e.clientY)
-
         }
+
         if (container.current) {
             console.log('setting listener')
             document.addEventListener("mousemove", mouseHander)

@@ -7,6 +7,7 @@
   --base-board: 650px;
   --project-card: 250px;
   --index: calc(1vw + 1vh);
+  --explorer-ovelay: rgba(255, 255, 255, 0.95);
 }
 
 body {
@@ -428,8 +429,7 @@ button {
   transform-style: preserve-3d;
   width: 100%;
   height: 100%;
-  transform: rotateX(var(--move-y)) rotateY(var(--move-x)) translateZ(0)
-    rotateZ(360deg);
+  transform: rotateX(var(--move-y)) rotateY(var(--move-x));
   will-change: transform;
   transition: transform var(--transition);
 }
@@ -807,7 +807,6 @@ button {
 }
 
 .xpSection .gallery__item {
-  will-change: transform;
   margin-bottom: 0.4em;
 }
 
@@ -905,52 +904,69 @@ button {
   position: absolute;
   z-index: 3;
   cursor: none;
-  transition: all 0.2s ease-in-out;
+
   background: linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.95) 0 var(--tbox-y1),
+      var(--explorer-ovelay) 0 var(--tbox-y1),
       transparent var(--tbox-y1) var(--tbox-y2),
-      rgba(255, 255, 255, 0.95) var(--tbox-y2) 100%
+      var(--explorer-ovelay) var(--tbox-y2) 100%
     ),
     linear-gradient(
       to right,
-      rgba(255, 255, 255, 0.95) 0 var(--tbox-x1),
+      var(--explorer-ovelay) 0 var(--tbox-x1),
       transparent var(--tbox-x1) var(--tbox-x2),
-      rgba(255, 255, 255, 0.95) var(--tbox-x2) 100%
+      var(--explorer-ovelay) var(--tbox-x2) 100%
     );
 }
 
 .scence__contaier .overlay.full {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--explorer-ovelay);
 }
 
-.scence__contaier .overlay h4 {
+.scence__contaier .overlay .overlay__text {
   position: absolute;
   z-index: 4;
-  font-size: 30px;
-  top: 40%;
-  transform: translateY(-100%);
-  color: black;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  left: 10vw;
-}
-
-.scence__contaier .overlay a {
-  position: absolute;
-  z-index: 4;
-  top: 43%;
-  transform: translateY(-100%);
-  left: 10vw;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   cursor: pointer;
 }
 
-/* .seeker {
-  position: absolute;
-  background: transparent;
-  transform: translateZ(-100px);
-  width: 100px;
-  height: 100px;
-  left: 50%;
-  top: 50%;
-} */
+.scence__contaier .overlay__text h4 {
+  font-size: calc(var(--index) * 2);
+  color: black;
+  font-family: inherit;
+  /* text-transform: uppercase; */
+  letter-spacing: 1px;
+}
+
+.scence__contaier .overlay__text p {
+  font-family: inherit;
+  font-size: calc(var(--index) * 0.75);
+  color: black;
+  padding: 20px 0;
+  line-height: calc(var(--index) * 1);
+}
+
+.scence__contaier .overlay__text a {
+  display: inline;
+  outline: 0;
+  border: 0;
+  font-size: 20px;
+  color: #fff;
+  background-image: linear-gradient(to right, #e052a0, #f15c41) !important;
+  border-radius: 3px;
+  padding: 14px 25px;
+  white-space: nowrap;
+  font-family: inherit;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.scence__contaier .overlay__text a:hover {
+  background-color: #e6375a;
+  background-image: none !important;
+}

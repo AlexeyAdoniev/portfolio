@@ -82,7 +82,7 @@ const letterByLetter = (text, {
 
 export const Projects = () => {
 
-    const [hovered, setHovered] = useState(0)
+    const [hovered, setHovered] = useState(null)
     const dispatch = useDispatch();
 
     const render = () => projects.map((project, idx) => {

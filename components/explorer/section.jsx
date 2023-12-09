@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import classNames from 'classnames';
-import { Montserrat } from "next/font/google";
+import { Montserrat, Arsenal } from "next/font/google";
 //import { Draggable } from '@shopify/draggable';
 
 
@@ -8,17 +8,18 @@ import { Loader } from '../loader.jsx';
 
 
 const montserratBold = Montserrat({ subsets: ["latin"], weight: "700" });
-
+const arsenal = Arsenal({ subsets: ["latin"], weight: "400" });
 
 
 const Explorer = ({ transition }) => {
 
     const [visible, setVisible] = useState(false)
+    const [textHovered, setTextHovered] = useState(false)
 
     const overlay = useRef(null);
 
 
-    function handleMouseMove({ clientY, clientX, maxY, maxX, BASE_WINDOW_SIZE_Y, BASE_WINDOW_SIZE_X }) {
+    function setCoords({ clientY, clientX, maxY, maxX, BASE_WINDOW_SIZE_Y, BASE_WINDOW_SIZE_X }) {
         const precentY = ((clientY / window.innerHeight) * 100) - BASE_WINDOW_SIZE_Y / 2
 
         const limitY = precentY < 0 || precentY > maxY;
@@ -34,6 +35,7 @@ const Explorer = ({ transition }) => {
         const x1 = precentX;
         const x2 = precentX + BASE_WINDOW_SIZE_X
 
+
         Object.assign(document.documentElement, {
             style: `
                 --tbox-y1: ${y1}%;
@@ -43,6 +45,14 @@ const Explorer = ({ transition }) => {
                
             `
         })
+    }
+
+    function textMouseEnterHandler() {
+        setTextHovered(true)
+    }
+
+    function textMouseLeaveHandler() {
+        setTextHovered(false)
     }
 
 
@@ -61,18 +71,23 @@ const Explorer = ({ transition }) => {
             const maxX = 100 - BASE_WINDOW_SIZE_X;
 
 
-            const handler = (e) => {
-                handleMouseMove({ clientY: e.clientY, clientX: e.clientX, maxY, maxX, BASE_WINDOW_SIZE_Y, BASE_WINDOW_SIZE_X })
+
+            const mouseHandler = (e) => {
+
+                setCoords({ clientY: e.clientY, clientX: e.clientX, maxY, maxX, BASE_WINDOW_SIZE_Y, BASE_WINDOW_SIZE_X })
             }
 
-            overlay.current.addEventListener("mousemove", handler)
+            overlay.current.addEventListener("mousemove", mouseHandler)
 
-            handleMouseMove({ clientY: window.innerHeight * 0.42, clientX: window.innerWidth * 0.72, maxY, maxX, BASE_WINDOW_SIZE_Y, BASE_WINDOW_SIZE_X })
+            setCoords({ clientY: window.innerHeight * 0.42, clientX: window.innerWidth * 0.72, maxY, maxX, BASE_WINDOW_SIZE_Y, BASE_WINDOW_SIZE_X })
             setVisible(true)
 
 
+
+
+
             return () => {
-                overlay.current.removeEventListener("mousemove", handler)
+                overlay.current.removeEventListener("mousemove", mouseHandler)
             }
 
         }, 1000)
@@ -90,10 +105,13 @@ const Explorer = ({ transition }) => {
                     aria-hidden="true" src="/explorer-video.mp4" playsInline=""></video>
             </div>
 
-            <div className="overlay full" ref={overlay}>\
-                <div className="overlay__text">
-                    <h4 className={montserratBold.className}>Explorer</h4>
-                    <a href="https://explorer.xp.network/">Visit</a>
+            <div className={classNames("overlay", {
+                full: textHovered
+            })} ref={overlay}>
+                <div className={arsenal.className + " overlay__text"} onMouseEnter={textMouseEnterHandler} onMouseLeave={textMouseLeaveHandler}>
+                    <h4 >Bridge Explorer</h4>
+                    <p>Versatile tool to track NFT transfers<br /> between blockchains.<br />Utilizes websocket technology</p>
+                    <a target='_blank' href="https://explorer.xp.network/">Visit</a>
 
                 </div>
 

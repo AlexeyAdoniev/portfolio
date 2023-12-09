@@ -82,6 +82,13 @@ const XP = ({ transition }) => {
                 observer.observe(elem)
 
             })
+
+
+            return () => {
+                images.forEach(elem => {
+                    observer.unobserve(elem)
+                })
+            }
         }
 
 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import SignaturePad from 'signature_pad';
 import trimCanvas from 'trim-canvas'
 
-//import { wait } from '@/utils';
+import { COLORS } from '@/utils'
 
 
 function getTrimmedSignature(signaturePad) {
@@ -15,14 +15,14 @@ function getTrimmedSignature(signaturePad) {
 }
 
 
-function saveSignature(signaturePad) {
+function saveSignature(signature) {
     return fetch('/api/signature', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             Accept: "*/*"
         },
-        body: JSON.stringify({ signature: getTrimmedSignature(signaturePad) })
+        body: JSON.stringify({ signature, color: COLORS.random() })
     }).then((res) => {
         if (res.status === 500) {
             throw new Error(res.status)
@@ -52,9 +52,9 @@ export const Signature = () => {
 
     const signHandler = () => {
         if (signaturePad.current) {
+            const sig = getTrimmedSignature(signaturePad.current)
             signaturePad.current.clear();
-
-            saveSignature(signaturePad.current).then(handleSaved).catch(async () => {
+            saveSignature(sig).then(handleSaved).catch(async () => {
                 //await wait(5000)
                 //saveSignature(signaturePad.current).catch(() => { })
 

@@ -1,10 +1,16 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ServerApiVersion } from "mongodb";
 
 const { DB_URI, DB_NAME, DB_COLLECTION } = process.env;
 
 export default async function handler(req, res) {
   try {
-    const client = new MongoClient(DB_URI);
+    const client = new MongoClient(DB_URI, {
+      serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+      },
+    });
 
     if (req.method === "GET") {
       await client.connect();
@@ -24,13 +30,14 @@ export default async function handler(req, res) {
         }
       });
 
-      const { signature } = req.body;
+      const { signature, color } = req.body;
       const collection = client.db(DB_NAME).collection(DB_COLLECTION);
       const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
       collection.insertOne({
         ip,
         signature,
+        color,
       });
 
       res.status(200).json({ message: "ok" });
@@ -47,5 +54,5 @@ export const config = {
     },
   },
   // Specifies the maximum allowed duration for this function to execute (in seconds)
-  maxDuration: 5,
+  maxDuration: 15,
 };

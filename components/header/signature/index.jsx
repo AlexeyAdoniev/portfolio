@@ -41,7 +41,11 @@ export const Signature = () => {
     let signaturePad = useRef(null);
 
     useEffect(() => {
-        signaturePad.current = new SignaturePad(document.querySelector("canvas"));
+        signaturePad.current = new SignaturePad(document.querySelector("canvas"), {
+            minWidth: 1,
+            maxWidth: 4,
+
+        });
     }, [])
 
     const clearHandler = () => {

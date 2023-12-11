@@ -95,11 +95,55 @@ nav ul li:hover span {
   position: absolute;
   right: 0;
   top: 0;
-  height: 100%;
   width: 45px;
-  display: flex;
-  flex-direction: column;
+  height: 100%;
+  padding-top: 50px;
+}
+
+.board aside .signatureWrapper {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: column-reverse;
   align-items: center;
+  margin-top: 0;
+  margin-bottom: auto;
+}
+
+.signatureContainer,
+.hiddenSignatures {
+  width: 33px;
+  height: 33px;
+  position: relative;
+  display: flex;
+  z-index: 1;
+}
+
+.signatureContainer.hovered {
+  z-index: 2;
+  animation: bubbleSig 0.2s ease;
+  transform: scale(1.1);
+}
+
+.signatureContainer img {
+  border-radius: 50%;
+  padding: 3px;
+  margin: auto;
+  width: calc(100% - 3px);
+  border: 1px solid black;
+  height: calc(100% - 3px);
+}
+
+.hiddenSignatures {
+  border-radius: 50%;
+  background: rgb(22, 22, 22);
+  color: white;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  margin: auto 1px auto auto;
+  border: 1px solid white;
+  user-select: none;
 }
 
 .board-content {
@@ -297,8 +341,7 @@ p {
 }
 
 .signatureWrapper canvas {
-  background-color: rgb(31, 30, 30) !important;
-
+  background-color: rgb(204, 204, 230) !important;
   cursor: url(../public/img/pen.png), auto;
 }
 
@@ -311,28 +354,6 @@ p {
 
 button {
   font-family: inherit;
-}
-
-/*.signatureWrapper button {
-  background: rgba(255, 255, 255, 0.2);
-  width: 45%;
-  border-radius: 7px;
-  border: none;
-  outline: 0;
-  cursor: pointer;
-  padding: 0.7em 3em;
-  color: white;
-  transition: all 0.3s;
-}
-
-.signatureWrapper button:hover {
-  background: rgba(255, 255, 255, 0.4);
-}*/
-
-.signed-user {
-  border-radius: 50%;
-  width: 43px;
-  height: 43px;
 }
 
 .snakeWrapper {

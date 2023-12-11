@@ -7,8 +7,8 @@ import gsap from 'gsap'
 import { Loader } from '../loader.jsx';
 
 
-const { Draggable } = require('../../node_modules/draggable/Draggable.min.js')
-const { InertiaPlugin } = require('../../node_modules/draggable/InertiaPlugin.min.js')
+const { Draggable } = require('./Draggable.min.js')
+const { InertiaPlugin } = require('./InertiaPlugin.min.js')
 
 const montserratBold = Montserrat({ subsets: ["latin"], weight: "700" });
 

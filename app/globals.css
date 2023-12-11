@@ -118,17 +118,16 @@ nav ul li:hover span {
   z-index: 1;
 }
 
-.signatureContainer.hovered {
+.signatureContainer:hover {
+  animation: bubbleSig 0.5s ease;
   z-index: 2;
-  animation: bubbleSig 0.2s ease;
-  transform: scale(1.1);
 }
 
 .signatureContainer img {
   border-radius: 50%;
-  padding: 3px;
+  padding: 2px;
   margin: auto;
-  width: calc(100% - 3px);
+  min-width: calc(100% - 3px);
   border: 1px solid black;
   height: calc(100% - 3px);
 }
@@ -190,6 +189,10 @@ p {
 .flip-wrapper {
   transform-style: preserve-3d;
   transform-origin: top;
+}
+
+.flip-wrapper.equator {
+  transform-origin: center;
 }
 
 .board-head {
@@ -338,10 +341,13 @@ p {
   margin: 40px auto 0 auto;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .signatureWrapper canvas {
   background-color: rgb(204, 204, 230) !important;
+  width: 100%;
+  height: 100%;
   cursor: url(../public/img/pen.png), auto;
 }
 
@@ -1002,4 +1008,25 @@ button {
 .scence__contaier .overlay__text a:hover {
   background-color: #e6375a;
   background-image: none !important;
+}
+
+.sigGhost {
+  position: fixed;
+  opacity: 1;
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+  border-radius: 50%;
+  transition: all 0.5s linear;
+}
+
+.sigGhost.transfered {
+  width: 33px;
+  border: 1px solid black;
+  height: 33px;
+  opacity: 0.2;
+}
+
+.canvasWrapper {
+  height: 300px;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Montserrat } from "next/font/google";
+
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
@@ -15,16 +15,13 @@ import { ServiceProvider } from "@/components/hocs/serviceProvider";
 import { init } from "@/services/snake";
 
 import { Board } from "./board";
+import { About } from "./about";
 
 
 const ROTATION_THROTTLE_RATE = 12;
 
 
-const Test = () => {
-    return <div className="about-content">
-        1
-    </div>
-}
+
 
 function Header() {
     let header = useRef(null);
@@ -77,6 +74,7 @@ function Header() {
 
 
     const showAbout = useSelector(state => state.global.showAbout)
+    const boardVisibility = useSelector(state => state.global.boardVisibility)
 
     return (
 
@@ -90,9 +88,9 @@ function Header() {
             <div className="top-line">
                 <Nav />
             </div>
-
-            {showAbout ? <Flipper > <Test />   </Flipper> : <Flipper> <Board />   </Flipper>}
-
+            <Flipper boardVisibility={boardVisibility}>
+                {showAbout ? <About /> : <Board />}
+            </Flipper>
         </header>
 
 

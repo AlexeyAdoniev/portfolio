@@ -21,6 +21,7 @@ const globalSlice = createSlice({
     transition: false,
     signatures: [],
     showAbout: false,
+    boardVisibility: true,
   },
   reducers: {
     selectMenuItem: (state, action) => {
@@ -38,6 +39,9 @@ const globalSlice = createSlice({
     setAbout: (state, action) => {
       state.showAbout = action.payload;
     },
+    setBoardVisibility: (state, action) => {
+      state.boardVisibility = action.payload;
+    },
   },
 });
 
@@ -53,5 +57,6 @@ export const {
   setTransition,
   setSignatures,
   setAbout,
+  setBoardVisibility,
 } = globalSlice.actions;
 export default store;

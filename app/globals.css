@@ -153,6 +153,11 @@ nav ul li:hover span {
   display: flex;
 }
 
+.about-content {
+  width: 692px;
+  background-image: black;
+}
+
 .board-content .board-content_text {
   width: 37%;
   margin: auto;

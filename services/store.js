@@ -20,6 +20,7 @@ const globalSlice = createSlice({
     demo: null,
     transition: false,
     signatures: [],
+    showAbout: false,
   },
   reducers: {
     selectMenuItem: (state, action) => {
@@ -34,6 +35,9 @@ const globalSlice = createSlice({
     setSignatures: (state, action) => {
       state.signatures = action.payload;
     },
+    setAbout: (state, action) => {
+      state.showAbout = action.payload;
+    },
   },
 });
 
@@ -43,6 +47,11 @@ const store = configureStore({
   },
 });
 
-export const { selectMenuItem, selectDemo, setTransition, setSignatures } =
-  globalSlice.actions;
+export const {
+  selectMenuItem,
+  selectDemo,
+  setTransition,
+  setSignatures,
+  setAbout,
+} = globalSlice.actions;
 export default store;

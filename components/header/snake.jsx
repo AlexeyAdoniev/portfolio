@@ -77,7 +77,7 @@ const Snake = ({ serviceContainer }) => {
     return <><div className="snakeWrapper" ref={container}>
     </div>
         <div className="snake-controls">
-            <button onClick={startHandler}>{!running ? 'START' : 'RESTART'}</button>
+            <button className='button' onClick={startHandler}>{!running ? 'START' : 'RESTART'}</button>
             <div className="arrows">
                 <div className="top">
                     <img src={pushedArrow === 'ArrowUp' ? "/img/key_pushed.png" : "/img/key_idle.png"} alt="idle_top" />

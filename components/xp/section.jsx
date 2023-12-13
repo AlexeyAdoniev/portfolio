@@ -101,7 +101,7 @@ const XP = ({ transition }) => {
             {visible && <h2 className={montserratBold.className}>
                 <span>XP.NETWORK</span>
                 {/* <p>NFT Bridge</p> */}
-                <a target='_blank' className={`xpVisitBtn ${montserratBold.className}`} href="https://xp.network/">Visit</a>
+                <a target='_blank' className={`xpVisitBtn ${montserratBold.className}`} rel='noopener noreferrer' href="https://xp.network/">Visit</a>
 
             </h2>}
 

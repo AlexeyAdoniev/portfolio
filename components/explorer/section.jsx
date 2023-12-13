@@ -111,7 +111,7 @@ const Explorer = ({ transition }) => {
                 <div className={arsenal.className + " overlay__text"} onMouseEnter={textMouseEnterHandler} onMouseLeave={textMouseLeaveHandler}>
                     <h4 >Bridge Explorer</h4>
                     <p>Versatile tool to track NFT transfers<br /> between blockchains.<br />Utilizes websocket technology</p>
-                    <a target='_blank' href="https://explorer.xp.network/">Visit</a>
+                    <a target='_blank' rel='noopener noreferrer' href="https://explorer.xp.network/">Visit</a>
 
                 </div>
 

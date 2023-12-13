@@ -57,7 +57,7 @@ const Dfiance = ({ transition }) => {
             <div className="layers__item layer-3">
                 <p>Dfiance is a PVP strategy card game that simulates a clash of two armies on a battlefield</p>
                 <div className='item__buttons'>
-                    <a target='_blank' href="https://dfiance.com/">Visit</a>
+                    <a target='_blank' rel='noopener noreferrer' href="https://dfiance.com/">Visit</a>
                     {/* <button>Stack</button> */}
                 </div>
 

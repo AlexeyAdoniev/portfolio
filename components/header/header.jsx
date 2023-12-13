@@ -1,7 +1,7 @@
 "use client";
 
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 import store from "@/services/store";
@@ -16,10 +16,18 @@ import { init } from "@/services/snake";
 
 import { Board } from "./board";
 import { About } from "./about";
-
+import { preloadImage } from "@/utils";
+import { SiteLoader } from "../siteLoader";
 
 const ROTATION_THROTTLE_RATE = 12;
 
+const PRELOAD_IMAGES = [
+    "/img/innerboard.png",
+    "/img/bg-website-min.png",
+    "/img/dfiance/thumb.jpg",
+    "/img/xp/preview.png",
+    "/img/explorer/preview.png",
+]
 
 
 
@@ -99,13 +107,29 @@ function Header() {
 }
 
 export default () => {
+    const [showLoader, setLoader] = useState(true)
+
     const serviceContainer = {
         _snake: { init },
     };
 
+    useEffect(() => {
+        const tm = setTimeout(() => {
+            setLoader(false)
+        }, 15_000)
+        Promise.all(PRELOAD_IMAGES.map((item) => preloadImage(item))).then(
+            setLoader(false)
+        ).catch((e) => {
+            console.log(e)
+            setLoader(false)
+        }).finally(() => {
+            clearTimeout(tm)
+        })
+    }, [])
+
     return <ServiceProvider value={{ serviceContainer }}>
         <Provider store={store}>
-            <Header />
+            {showLoader ? <SiteLoader /> : <Header />}
         </Provider>
     </ServiceProvider>
 

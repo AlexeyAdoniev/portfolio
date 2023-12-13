@@ -6,9 +6,9 @@ export default function Home() {
   return (
     <>
       <div className="app">
-        {true && <Header />}
+        <Header />
         <ProjectDemo />
-        {false && (
+        {/* {false && (
           <section style={{ height: "200vh" }}>
             {false && (
               <a
@@ -19,7 +19,7 @@ export default function Home() {
               </a>
             )}
           </section>
-        )}
+        )} */}
       </div>
       <div className="nomobile">
         <NoMobile />

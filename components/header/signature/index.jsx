@@ -6,7 +6,7 @@ import { COLORS } from '@/utils'
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setSignatures } from '@/services/store'
+import { setSignatures, setShowSignatures } from '@/services/store'
 
 
 
@@ -58,10 +58,6 @@ function transferIcon({ signature, color }) {
 
 
 
-
-
-
-
 }
 
 
@@ -99,10 +95,11 @@ function resizeCanvas() {
 export const Signature = () => {
 
     let signaturePad = useRef(null);
-    const dipatch = useDispatch()
+    const dispatch = useDispatch()
     const signatures = useSelector(state => state.global.signatures)
 
     useEffect(() => {
+        dispatch(setShowSignatures(true))
         signaturePad.current = new SignaturePad(document.querySelector("canvas"), {
             minWidth: 1,
             maxWidth: 4,
@@ -117,6 +114,7 @@ export const Signature = () => {
         window.addEventListener("resize", resizeHandler)
 
         return () => {
+            dispatch(setShowSignatures(false))
             window.removeEventListener("resize", resizeHandler)
         }
     }, [])
@@ -135,8 +133,8 @@ export const Signature = () => {
             const signature = { signature: base64, color: COLORS.random() }
             await transferIcon(signature)
             console.log(signature)
-            dipatch(setSignatures([...signatures, signature]))
-            false && saveSignature(signature).then(handleSaved).catch(async () => {
+            dispatch(setSignatures([...signatures, signature]))
+            true && saveSignature(signature).then(handleSaved).catch(async () => {
                 //await wait(5000)
                 //saveSignature(signaturePad.current).catch(() => { })
 
@@ -154,8 +152,8 @@ export const Signature = () => {
 
         </div>
         <div className="controls">
-            <button onClick={clearHandler}>Clear</button>
-            <button onClick={signHandler}>Sign</button>
+            <button className='button' onClick={clearHandler}>Clear</button>
+            <button className='button' onClick={signHandler}>Sign</button>
         </div>
     </div>
 }

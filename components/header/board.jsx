@@ -30,7 +30,7 @@ export const Board = () => {
                 Alexey
                 <br /> Adoniev
             </h1>
-            <p>Passionate developer and web artist</p>
+            <p>Passionate developer<br /> and web artist</p>
         </div>
         <div className="board-content_interactive ">
             <div className="search-bar"></div>

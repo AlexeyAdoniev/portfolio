@@ -153,3 +153,34 @@ export const COLORS = {
     return result;
   },
 };
+
+export const letterByLetter = (
+  text,
+  { duration = 0.2, delay = 0.02, initialDelay = 0, color = "white" } = {}
+) => {
+  const id = Math.random();
+  let afterSlash = false;
+  return text
+    ? text.split("").map((l, i) => {
+        const style = afterSlash
+          ? {
+              color,
+              WebkitFilter: "brightness(1.75)",
+            }
+          : {};
+
+        if (l === "/") {
+          afterSlash = true;
+        }
+
+        const animation = `fadeIn ${duration}s ease-out ${
+          initialDelay + delay * i
+        }s forwards`;
+        return (
+          <span style={{ animation, ...style }} key={`split-${id}-${i}`}>
+            {l}
+          </span>
+        );
+      })
+    : "";
+};

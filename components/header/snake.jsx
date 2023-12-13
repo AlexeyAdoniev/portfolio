@@ -1,10 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { withServices } from '../hocs/wtihServices';
 import { rejectWindowScroll } from '@/utils';
+import classNames from 'classnames';
 
 
 const adaptToScreen = () => {
     switch (true) {
+        case window.innerWidth < 1200: {
+            return .8
+        }
         case window.innerWidth < 1600: {
             return .6
         }
@@ -76,16 +80,26 @@ const Snake = ({ serviceContainer }) => {
 
     return <><div className="snakeWrapper" ref={container}>
     </div>
+
         <div className="snake-controls">
-            <button className='button' onClick={startHandler}>{!running ? 'START' : 'RESTART'}</button>
+            <button className='button snake-start' onClick={startHandler}>{!running ? 'START' : 'RESTART'}</button>
             <div className="arrows">
                 <div className="top">
-                    <img src={pushedArrow === 'ArrowUp' ? "/img/key_pushed.png" : "/img/key_idle.png"} alt="idle_top" />
+                    <div onClick={() => keyHandler.current && keyHandler.current({ code: 'ArrowUp' })} className={classNames("controls-button", { active: pushedArrow === 'ArrowUp' })}>
+                        <i className="fa-solid fa-arrow-up"></i>
+                    </div>
+
                 </div>
                 <div className="bot">
-                    <img src={pushedArrow === 'ArrowLeft' ? "/img/key_pushed.png" : "/img/key_idle.png"} alt="idle_top" />
-                    <img src={pushedArrow === 'ArrowDown' ? "/img/key_pushed.png" : "/img/key_idle.png"} alt="idle_top" />
-                    <img src={pushedArrow === 'ArrowRight' ? "/img/key_pushed.png" : "/img/key_idle.png"} alt="idle_top" />
+                    <div onClick={() => keyHandler.current && keyHandler.current({ code: 'ArrowLeft' })} className={classNames("controls-button", { active: pushedArrow === 'ArrowLeft' })}>
+                        <i className="fa-solid fa-arrow-left"></i>
+                    </div>
+                    <div onClick={() => keyHandler.current && keyHandler.current({ code: 'ArrowDown' })} className={classNames("controls-button", { active: pushedArrow === 'ArrowDown' })}>
+                        <i className="fa-solid fa-arrow-down"></i>
+                    </div><div onClick={() => keyHandler.current && keyHandler.current({ code: 'ArrowRight' })} className={classNames("controls-button", { active: pushedArrow === 'ArrowRight' })}>
+                        <i className="fa-solid fa-arrow-right"></i>
+                    </div>
+
                 </div>
             </div>
 

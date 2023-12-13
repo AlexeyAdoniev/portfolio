@@ -2,6 +2,7 @@
   --main-bg-color: #000;
   --main-font-color: #ffffff;
   --accent: #40bd5d;
+  --dim-accent: #206931;
   --dim-text: rgba(255, 255, 255, 0.6);
   --transition: 1s cubic-bezier(0.05, 0.5, 0, 1);
   --base-board: 650px;
@@ -17,6 +18,65 @@ body {
   overflow: hidden;
   /* overflow-y: hidden;
   overflow-x: hidden; */
+}
+
+.nomobile {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 0;
+}
+
+.nomobile::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  /* filter: blur(20px); */
+}
+
+.nomobile__container {
+  margin: auto;
+  display: flex;
+  position: relative;
+  z-index: 4;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.nomobile__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 70vw;
+  margin: auto;
+  margin-right: 0;
+  z-index: 555;
+}
+
+.nomobile__text h1 {
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 30px;
+}
+
+.nomobile__text p {
+  font-size: 14px;
+  color: white;
+}
+
+.nomobile__container img {
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  transform: translate(0, -50%);
+  height: 20vh;
+  margin-right: 30px;
+  filter: blur(6px);
 }
 
 header {
@@ -116,8 +176,16 @@ nav ul li:hover span {
   display: inline-flex;
   flex-direction: column-reverse;
   align-items: center;
-  margin-top: 0;
-  margin-bottom: auto;
+  margin: 0 auto auto auto;
+  position: relative;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+}
+
+.board aside .signatureWrapper.visible {
+  opacity: 1;
+  visibility: visible;
 }
 
 .signatureContainer,
@@ -212,6 +280,7 @@ nav ul li:hover span {
 .about-content__left p {
   padding: 10px 0;
   line-height: 23px;
+  animation: fadeIn 1s ease-in;
 }
 
 .about-content__hello {
@@ -287,6 +356,7 @@ h1 {
 p {
   color: var(--dim-text);
   font-size: 18px;
+  line-height: 22px;
 }
 
 .flip-wrapper {
@@ -342,6 +412,10 @@ p {
   color: white;
   font-size: 16px;
   text-decoration: none;
+}
+
+.board-content_text p br {
+  display: none;
 }
 
 .board-content_text a img {
@@ -405,6 +479,7 @@ p {
   font-size: 14px;
   color: var(--dim-text);
   margin-left: 11px;
+  line-height: 17px;
   transition: color 0.4s ease-in;
 }
 
@@ -437,14 +512,6 @@ p {
 .interactive-menu_content {
   padding-top: 30px;
   flex: 1;
-}
-
-.signatureWrapper {
-  width: 90%;
-  margin: 40px auto 0 auto;
-  display: flex;
-  flex-direction: column;
-  position: relative;
 }
 
 .signatureWrapper canvas {
@@ -480,21 +547,40 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
+}
+
+.snake-controls .controls-button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  background-color: transparent;
+  border: 1px solid var(--dim-accent);
+  box-shadow: 0px 0px 6px var(--accent);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.snake-controls .controls-button i {
+  margin: auto;
+  font-size: 20px;
+  color: var(--accent);
+}
+
+.snake-controls .controls-button:hover,
+.snake-controls .controls-button.active {
+  box-shadow: 0px 0px 6px transparent;
+  border: 1px solid transparent;
+  background-color: var(--accent);
+}
+
+.snake-controls .controls-button:hover i,
+.snake-controls .controls-button.active i {
+  color: black;
 }
 
 .signatureWrapper button {
-  background: transparent;
-  border: 1px solid rgb(204, 204, 230);
-  color: rgb(204, 204, 230);
-  padding: 7px 15px;
-  cursor: pointer;
   margin: auto;
-  transition: all 1s ease;
-  text-transform: uppercase;
-}
-
-.signatureWrapper button:hover {
-  background: rgba(255, 255, 255, 0.2);
 }
 
 .snake-controls .arrows {
@@ -512,21 +598,38 @@ button {
   width: 170px;
 }
 
+.snake-controls .arrows .top,
+.snake-controls .arrows .bot {
+  height: 50px;
+  display: flex;
+}
+
 .snake-controls .arrows .top {
+  justify-content: center;
   margin-bottom: 5px;
 }
 
-.snake-controls .arrows .bot img:nth-child(1) {
-  transform: rotate(-90deg);
+.snake-controls .arrows .bot {
+  justify-content: space-between;
 }
 
-.snake-controls .arrows .bot img:nth-child(2) {
-  transform: rotate(180deg);
+/* .snake-controls .arrows .bot .controls-button:nth-child(1) {
+  margin: auto;
+  margin-left: 0;
+
 }
 
-.snake-controls .arrows .bot img:nth-child(3) {
-  transform: rotate(90deg);
+.snake-controls .arrows .bot .controls-button:nth-child(2) {
+  margin: auto;
+
+
 }
+
+.snake-controls .arrows .bot .controls-button:nth-child(3) {
+  margin: auto;
+  margin-right: 0;
+
+} */
 
 .dfiance,
 .xpSection,
@@ -769,6 +872,17 @@ button {
   transform: translateY(100%);
 }
 
+.projectInfo ul {
+  position: relative;
+}
+
+.projectInfo .button {
+  position: absolute;
+  bottom: 0vh;
+  right: 0;
+  transform: translateX(-100%);
+}
+
 .projectInfo h3 {
   font-weight: 800;
   font-size: 18px;
@@ -805,7 +919,16 @@ button {
   display: inline-block;
   opacity: 0;
   white-space: pre;
-  /* animation: fadeIn 0.5s ease-out forwards;*/
+}
+
+.button.snake-start {
+  width: 106px;
+}
+
+.letter-by-letter > span.x-clam {
+  opacity: 1;
+  display: initial;
+  white-space: unset;
 }
 
 .prodecDescr span {
@@ -1131,6 +1254,8 @@ button {
 
 .canvasWrapper {
   height: 300px;
+  width: 300px;
+  margin: auto;
 }
 
 ul.social {

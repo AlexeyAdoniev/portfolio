@@ -6,6 +6,7 @@ import { demos, selectDemo, setTransition } from '@/services/store';
 import { useDispatch } from 'react-redux';
 
 import { Montserrat } from "next/font/google";
+import { letterByLetter } from '@/utils';
 const montserratBold = Montserrat({ subsets: ["latin"], weight: "800" });
 
 
@@ -59,25 +60,7 @@ const projects = [
  */
 
 
-const letterByLetter = (text, {
-    duration = 0.2, delay = 0.02, initialDelay = 0, color = 'white'
-} = {}) => {
-    const id = Math.random();
-    let afterSlash = false
-    return text ? text.split('').map((l, i) => {
-        const style = afterSlash ? {
-            color,
-            WebkitFilter: 'brightness(1.75)'
-        } : {}
 
-        if (l === '/') {
-            afterSlash = true
-        }
-
-        const animation = `fadeIn ${duration}s ease-out ${initialDelay + (delay * i)}s forwards`
-        return <span style={{ animation, ...style }} key={`split-${id}-${i}`}>{l}</span>
-    }) : ''
-}
 
 
 export const Projects = () => {
@@ -135,8 +118,13 @@ export const Projects = () => {
                         const initialDelay = 0.1 + (i * 0.05);
                         return <li key={`tech-${t}-${i}`} className='letter-by-letter'>{letterByLetter(t, { initialDelay, color: project.color })}</li>
                     })}
+                    <button className="button letter-by-letter" style={{ "--accent": project.color, WebkitFilter: 'brightness(125%)' }} onClick={() => {
+                        dispatch(setTransition(true))
+                        setTimeout(() => dispatch(selectDemo(project.demo)))
+                    }}>{letterByLetter('Demo', { initialDelay: .2 })}</button>
 
                 </ul>
+
             </div>}
         </div>
 

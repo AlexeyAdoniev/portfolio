@@ -3,23 +3,25 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setSignatures } from '@/services/store'
 
+import classNames from 'classnames';
+
 
 const OFFSET = 8;
 
 const SignatureList = () => {
 
     const dispatch = useDispatch();
-    const [showLoader, setLoader] = useState(false);
+    //const [show, setShow] = useState(false);
     const [cutIndex, setCutIndex] = useState(0)
 
     const data = useSelector(state => state.global.signatures)
-
+    const showSignatures = useSelector(state => state.global.showSignatures)
 
 
     useEffect(() => {
         //if (!data?.length) return
         const tm = setTimeout(() => {
-            false && fetch('/api/signature').then(res => res.json()).then((res) => {
+            true && fetch('/api/signature').then(res => res.json()).then((res) => {
                 Array.isArray(res.result) && dispatch(setSignatures([...res.result]));
             }).catch(() => {
                 //TODO
@@ -62,11 +64,12 @@ const SignatureList = () => {
 
 
     return <aside >
-        <div className="signatureWrapper">
+        <div className={classNames("signatureWrapper", {
+            visible: showSignatures
+        })}>
             {renderSignatures()}
-
         </div>
-        {Boolean(cutIndex) && <div className="hiddenSignatures">
+        {showSignatures && Boolean(cutIndex) && <div className="hiddenSignatures">
             +{cutIndex}
         </div>}
     </aside>

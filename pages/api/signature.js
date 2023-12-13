@@ -2,6 +2,7 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 
 const { DB_URI, DB_NAME, DB_COLLECTION } = process.env;
 
+
 export default async function handler(req, res) {
   try {
     const client = new MongoClient(DB_URI, {
@@ -43,7 +44,8 @@ export default async function handler(req, res) {
 
       res.status(200).json({ message: "ok" });
     }
-  } catch {
+  } catch (e) {
+    console.log(e,'eee')
     res.end();
   }
 }
@@ -54,6 +56,7 @@ export const config = {
       sizeLimit: "1mb",
     },
   },
+
   // Specifies the maximum allowed duration for this function to execute (in seconds)
   maxDuration: 15,
 };

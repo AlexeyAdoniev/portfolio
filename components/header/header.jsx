@@ -114,16 +114,24 @@ export default () => {
     };
 
     useEffect(() => {
-        const tm = setTimeout(() => {
+        //main timeout
+        const timeout = setTimeout(() => {
             setLoader(false)
         }, 15_000)
-        Promise.all(PRELOAD_IMAGES.map((item) => preloadImage(item))).then(
-            setLoader(false)
-        ).catch((e) => {
+
+        let fastLoad = true;
+        //if loads too fast  wait for 2 seconds regarless
+        setTimeout(() => {
+            fastLoad = false;
+        }, 1000)
+        Promise.all(PRELOAD_IMAGES.map((item) => preloadImage(item))).then(() => {
+            const tm = fastLoad ? 1650 : 0
+            setTimeout(() => setLoader(false), tm)
+        }).catch((e) => {
             console.log(e)
             setLoader(false)
         }).finally(() => {
-            clearTimeout(tm)
+            clearTimeout(timeout)
         })
     }, [])
 

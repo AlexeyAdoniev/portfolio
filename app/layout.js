@@ -17,6 +17,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-
+  scalable=yes"/>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className={montserrat.className}>{children}</body>

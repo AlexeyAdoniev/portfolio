@@ -1,8 +1,8 @@
 import { Montserrat } from "next/font/google";
 import "@/app/reset.css";
 import "@/app/animations.css";
-import "@/app/globals.css";
 import "@/app/media.css";
+import "@/app/globals.css";
 import "@/public/fonts/fontawasome/css/fontawesome.min.css";
 import "@/public/fonts/fontawasome/css/solid.min.css";
 

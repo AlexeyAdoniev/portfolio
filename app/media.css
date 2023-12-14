@@ -3,6 +3,10 @@
     --project-card: 200px;
   }
 
+  .projectSelector__imageWrapper.hovered {
+    width: calc(var(--project-card) * 0.95);
+  }
+
   .top-line {
     padding: 30px 0 20px 0;
   }

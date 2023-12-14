@@ -71,25 +71,30 @@ export const Projects = () => {
     const render = () => projects.map((project, idx) => {
         const key = `proj-${idx}`;
 
+        const elemHovered = idx === hovered;
+        const shrinked = hovered !== null && idx !== hovered;
+
         const enterHandler = () => {
             setHovered(idx)
         }
 
         const clickHandler = () => {
-            if (idx === hovered) {
+            if (elemHovered) {
                 dispatch(setTransition(true))
                 setTimeout(() => dispatch(selectDemo(project.demo)))
             }
         }
 
+
+
         const className = classNames('projectSelector__imageWrapper', {
-            hovered: idx === hovered,
-            shrinked: hovered !== null && idx !== hovered
+            hovered: elemHovered,
+            shrinked
         })
 
         const getStyle = () => {
             let style = {}
-            if (idx === hovered) {
+            if (elemHovered) {
                 style = {
                     background: `linear-gradient(45deg, ${project.color}, rgb(22, 22, 22))`,
                     backgroundSize: "400%",
@@ -100,7 +105,10 @@ export const Projects = () => {
         }
 
 
-        return <div onClick={clickHandler} style={getStyle()} onMouseEnter={enterHandler} key={key} className={className}> <img src={project.src} alt={key} /></div >
+        return <div onClick={clickHandler} style={getStyle()} onMouseEnter={enterHandler} key={key} className={className}>
+            {(!elemHovered && !shrinked) && <img src="/img/zoom-21.svg" alt="zoom" className='zoonIcon' />}
+            <img src={project.src} alt={key} />
+        </div >
     })
 
 

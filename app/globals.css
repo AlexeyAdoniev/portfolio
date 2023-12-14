@@ -6,7 +6,7 @@
   --dim-text: rgba(255, 255, 255, 0.6);
   --transition: 1s cubic-bezier(0.05, 0.5, 0, 1);
   --base-board: 650px;
-  --project-card: 250px;
+  --project-card: 300px;
   --index: calc(1vw + 1vh);
   --explorer-ovelay: rgba(255, 255, 255, 0.95);
 }
@@ -820,7 +820,7 @@ button {
 }
 
 .projectsWrapper {
-  height: 250px;
+  height: 300px;
 }
 
 .projectSelector {
@@ -840,6 +840,31 @@ button {
   transition: width 0.15s ease-in-out;
 }
 
+.projectSelector__imageWrapper img.zoonIcon {
+  position: absolute;
+  bottom: unset;
+  right: unset;
+  top: 0;
+  left: 3px;
+  width: 35px;
+  z-index: 31;
+  transform: scale(1);
+  filter: unset;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .projectSelector__imageWrapper img {
   position: absolute;
   z-index: 3;
@@ -852,7 +877,7 @@ button {
 }
 
 .projectSelector__imageWrapper.hovered {
-  width: calc(var(--project-card) * 0.95);
+  width: calc(var(--project-card) * 0.83);
   position: relative;
 
   animation: glower 5s linear infinite;

@@ -1034,9 +1034,13 @@ button {
 
 .xpSection.visible h2 p {
   color: black;
-  padding-top: 8px;
-  font-size: calc(var(--index));
+  padding-bottom: 8px;
+  font-size: 18px;
+  text-align: center;
   font-weight: normal;
+  user-select: none;
+  text-transform: none;
+  opacity: 0.7;
 }
 
 .xpVisitBtn {

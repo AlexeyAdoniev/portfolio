@@ -99,8 +99,8 @@ const XP = ({ transition }) => {
     return <div className={classNames('xpSection', { visible })}>
         <div className="xpSection__container">
             {visible && <h2 className={montserratBold.className}>
+                <p>Seamlessly move NFTs<br /> between blockchains with</p>
                 <span>XP.NETWORK</span>
-                {/* <p>NFT Bridge</p> */}
                 <a target='_blank' className={`xpVisitBtn ${montserratBold.className}`} rel='noopener noreferrer' href="https://xp.network/">Visit</a>
 
             </h2>}

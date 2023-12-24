@@ -35,6 +35,7 @@ export const Board = () => {
         <div className="board-content_interactive ">
             <div className="search-bar"></div>
             <div className="interactive-menu main-border">
+
                 <div className="interactive-menu_sidebar">
                     <div className="glare"></div>
                     <HeaderMenu />

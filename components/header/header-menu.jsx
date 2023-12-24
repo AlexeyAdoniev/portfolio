@@ -9,7 +9,7 @@ import { selectMenuItem, menuItems } from '@/services/store';
 
 
 
-const items = [
+export const items = [
     {
         icon: () => <Image
             src="/img/figma.svg"

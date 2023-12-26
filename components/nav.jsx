@@ -2,9 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import gsap from "gsap";
 
+
+
 import { setAbout, setBoardVisibility } from '@/services/store';
 
 const ANIMATION_DURATION = 1000
+const MOBILE = window.innerWidth <= 800;
 
 export const Nav = () => {
 
@@ -16,7 +19,7 @@ export const Nav = () => {
         const flipper = document.querySelector('.flip-wrapper');
         flipper.classList.add('equator')
         gsap.to(".flip-wrapper", {
-            transform: `rotateX(-180deg)`,
+            transform: MOBILE ? `rotateY(-180deg)` : `rotateX(-180deg)`,
             duration: ANIMATION_DURATION / 1000,
         });
 
@@ -27,7 +30,7 @@ export const Nav = () => {
 
         setTimeout(() => {
             gsap.to(".flip-wrapper", {
-                transform: `rotateX(0deg)`,
+                transform: MOBILE ? 'rotateY(0deg)' : `rotateX(0deg)`,
                 duration: 0,
             });
 
@@ -42,7 +45,7 @@ export const Nav = () => {
         const flipper = document.querySelector('.flip-wrapper');
         flipper.classList.add('equator')
         gsap.to(".flip-wrapper", {
-            transform: `rotateX(-180deg)`,
+            transform: MOBILE ? 'rotateY(-180deg)' : `rotateX(-180deg)`,
             duration: ANIMATION_DURATION / 1000,
         });
 
@@ -53,7 +56,7 @@ export const Nav = () => {
 
         setTimeout(() => {
             gsap.to(".flip-wrapper", {
-                transform: `rotateX(0deg)`,
+                transform: MOBILE ? 'rotateY(0deg)' : `rotateX(0deg)`,
                 duration: 0,
             });
 

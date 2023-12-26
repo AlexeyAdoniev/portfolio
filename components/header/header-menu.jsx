@@ -5,7 +5,7 @@ import Image from "next/image";
 import classNames from 'classnames';
 
 import { useDispatch, useSelector } from 'react-redux'
-import { selectMenuItem, menuItems } from '@/services/store';
+import { selectMenuItem, menuItems, toggleHamburger } from '@/services/store';
 
 
 
@@ -41,6 +41,13 @@ export const HeaderMenu = () => {
 
     const dispatch = useDispatch()
     const activeMenuItem = useSelector(state => state.global.activeMenuItem);
+    const expandHamburgerMenu = useSelector(state => state.global.expandHamburgerMenu);
+
+
+    const clickHandler = (item) => {
+        expandHamburgerMenu && dispatch(toggleHamburger())
+        dispatch(selectMenuItem(item.content))
+    }
 
 
     const rednerMenu = () => items.map((item, index) => {
@@ -49,7 +56,7 @@ export const HeaderMenu = () => {
 
         return <li className={classNames('menu-item', {
             active
-        })} onClick={() => dispatch(selectMenuItem(item.content))} key={`hmi-${index}`}>
+        })} onClick={() => clickHandler(item)} key={`hmi-${index}`}>
             <div className="menu_button">{item.icon()}</div>
             <span>{item.text}</span>
         </li>

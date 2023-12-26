@@ -23,6 +23,7 @@ const globalSlice = createSlice({
     showAbout: false,
     boardVisibility: true,
     showSignatures: false,
+    expandHamburgerMenu: false,
   },
   reducers: {
     selectMenuItem: (state, action) => {
@@ -46,6 +47,9 @@ const globalSlice = createSlice({
     setShowSignatures: (state, action) => {
       state.showSignatures = action.payload;
     },
+    toggleHamburger: (state) => {
+      state.expandHamburgerMenu = !state.expandHamburgerMenu;
+    },
   },
 });
 
@@ -63,5 +67,6 @@ export const {
   setAbout,
   setBoardVisibility,
   setShowSignatures,
+  toggleHamburger,
 } = globalSlice.actions;
 export default store;

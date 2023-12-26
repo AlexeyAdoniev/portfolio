@@ -468,6 +468,7 @@ p {
   margin-left: 0;
   display: flex;
   overflow: hidden;
+  position: relative;
 }
 
 .interactive-menu_sidebar {
@@ -497,14 +498,16 @@ p {
   padding: 70px 10px 50px 10px;
 }
 
-.interactive-menu_sidebar ul li {
+.interactive-menu_sidebar ul li,
+.mobile-interactive-menu .menu-item {
   display: flex;
   align-items: center;
   padding: 8px 0 8px 7px;
   cursor: pointer;
 }
 
-.interactive-menu_sidebar ul li span {
+.interactive-menu_sidebar ul li span,
+.mobile-interactive-menu .menu-item span {
   font-size: 14px;
   color: var(--dim-text);
   margin-left: 11px;
@@ -516,7 +519,8 @@ p {
   color: var(--main-font-color);
 }
 
-.interactive-menu_sidebar .menu_button {
+.interactive-menu_sidebar .menu_button,
+.mobile-interactive-menu .menu-item .menu_button {
   width: 28px;
   height: 28px;
   background: url(../public/img/menu-btn.png) no-repeat;
@@ -761,7 +765,6 @@ button {
   text-decoration: none;
   border-radius: 12px;
   margin-top: 20px;
-  cursor: pointer;
   font-size: 16px;
   letter-spacing: 1.5px;
   font-family: inherit;
@@ -1346,4 +1349,54 @@ ul.social img {
 
 ul.social li:hover img {
   filter: brightness(115%);
+}
+
+.hamburger-menu {
+  display: block;
+  position: relative;
+  margin: auto 0 auto auto;
+  z-index: 3;
+}
+
+.hamburger-menu .icon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.hamburger-menu .icon div {
+  display: inline-block;
+  margin: 3px 0;
+  height: 2px;
+  width: 18px;
+  background: var(--dim-text);
+  transition: all 0.1s ease-in-out;
+}
+
+.hamburger-menu .icon div:nth-child(2) {
+  transition: none;
+}
+
+.hamburger-menu .icon div:nth-child(2) {
+  width: 14px;
+}
+
+.expanded .hamburger-menu .icon {
+  transform: translateY(5%);
+}
+
+.expanded .hamburger-menu .icon div:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.expanded .hamburger-menu .icon div:nth-child(3) {
+  transform: rotate(-45deg) translate(30%, -277%);
+}
+
+.expanded .hamburger-menu .icon div:nth-child(2) {
+  display: none;
+}
+
+.mobile-interactive-menu {
+  display: none;
 }

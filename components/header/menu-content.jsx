@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux'
 
 import { menuItems } from '@/services/store';
@@ -29,7 +29,9 @@ export const MenuContent = () => {
 
     const activeMenuItem = useSelector(state => state.global.activeMenuItem);
 
-    const Content = components[activeMenuItem] ? React.memo(components[activeMenuItem]) : EMPTY_RENDER
+
+    const Content = React.useMemo(components[activeMenuItem] ? () => components[activeMenuItem] : EMPTY_RENDER, [activeMenuItem])
+
 
     return <Content />
 }

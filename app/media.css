@@ -166,10 +166,14 @@
     display: flex;
   } */
 
+  :root {
+    --project-card: 250px;
+  }
+
   header {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
   .container.flip-wrapper {
@@ -202,6 +206,10 @@
   .board,
   .interactive-menu {
     height: 100%;
+  }
+
+  .interactive-menu {
+    background: rgb(12 11 11);
   }
 
   .board-content .board-content_text {
@@ -237,17 +245,115 @@
   }
 
   .interactive-menu_content {
-    padding-top: 60px;
+    padding-top: 20px;
+  }
+
+  .expanded .interactive-menu_content {
+    display: none;
   }
 
   .interactive-menu_sidebar {
     width: 100%;
     display: none;
+    animation: 0.5s ease fadeIn;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .expanded .interactive-menu_sidebar {
+    display: initial;
+    position: absolute;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .expanded .menu-item.active-item {
+    display: none;
+  }
+
+  .expanded .interactive-menu_sidebar ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .expanded .interactive-menu_sidebar ul li {
+    width: 60%;
+    padding: 10px 5px;
   }
 
   .interactive-menu_sidebar ul {
-    padding: 18px 10px;
+    padding: 5px 10px;
+  }
+
+  .expanded .interactive-menu_sidebar li.menu-item.active .menu_button {
+    background: url(../public/img/menu-btn.png) no-repeat;
+    background-size: cover;
+    border-radius: 0;
+  }
+
+  .interactive-menu.expanded {
+    background: var(--main-bg-color);
+    transition: 0.5s ease fadeIn;
+  }
+
+  .mobile-interactive-menu .menu-item span,
+  .interactive-menu_sidebar ul li span {
+    font-size: 16px;
+  }
+
+  .interactive-menu_sidebar li.menu-item.active {
+    background: none;
+  }
+
+  .mobile-interactive-menu {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px 0 10px;
+    height: 40px;
+  }
+
+  .projectsWrapper {
+    height: 250px;
+  }
+
+  .projectInfo .button {
+    transform: translateX(-50%);
+  }
+
+  .board aside {
+    display: none;
+  }
+
+  .about-content {
+    height: auto;
+    padding: 20px 20px 50px 20px;
+    flex-direction: column-reverse;
+  }
+
+  .about-content__left {
+    width: 100%;
+    margin-top: 35px;
+  }
+
+  .about-content__right .avatarWrapper {
+    margin: auto;
+    width: 320px;
+    height: 320px;
+  }
+
+  .about-content__right .social {
+    display: none;
+  }
+
+  .about-text__wrapper {
+    height: auto;
+  }
+
+  .about-content__left h3,
+  .about-content__hello {
+    text-align: center;
   }
 }
 

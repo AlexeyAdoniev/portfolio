@@ -7,8 +7,8 @@ import { useDispatch } from 'react-redux';
 
 import { Montserrat } from "next/font/google";
 import { letterByLetter } from '@/utils';
-const montserratBold = Montserrat({ subsets: ["latin"], weight: "800" });
 
+const montserratBold = Montserrat({ subsets: ["latin"], weight: "800" });
 
 const projects = [
     {

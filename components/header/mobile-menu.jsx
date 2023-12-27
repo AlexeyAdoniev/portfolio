@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { items } from './header-menu'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectMenuItem, menuItems, toggleHamburger } from '@/services/store';
+import { toggleHamburger } from '@/services/store';
 
 export const MobileMenu = () => {
 

@@ -27,6 +27,18 @@
   }
 }
 
+@keyframes glimer {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes shake {
   50% {
     transform: translate3d(2.5px, 0, 0);
@@ -116,7 +128,7 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(1.15);
+    transform: scale(1.2);
   }
   100% {
     transform: scale(1);

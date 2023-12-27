@@ -12,7 +12,7 @@ import store from "@/services/store";
 import { Provider } from "react-redux";
 import { demos, setTransition, selectDemo } from '@/services/store';
 
-import { EMPTY_RENDER, doScrolling, preloadImage } from '@/utils';
+import { EMPTY_RENDER, doScrolling, preloadImage, MOBILE } from '@/utils';
 
 
 const SCROLL_DURATION = 1200;
@@ -52,6 +52,7 @@ const ProjectDemo = () => {
         if (project) {
 
             const scrollUp = (e) => {
+
                 if (e.deltaY < 0) {
                     exitDemo()
                 }
@@ -69,6 +70,8 @@ const ProjectDemo = () => {
             ]).then(() => {
                 dispatch(setTransition(false))
                 window.addEventListener("wheel", scrollUp)
+
+
             })
 
             return () => {
@@ -81,9 +84,9 @@ const ProjectDemo = () => {
 
     return <section id="project" ref={container}>
         {demo && !transition && <div className="scroll-up" >
-            <div className="mousey" onClick={exitDemo}>
+            {MOBILE ? <img className="mousey mobile" src="/img/swipe-up.svg" alt="swipe" onClick={exitDemo} /> : <div className="mousey" onClick={exitDemo}>
                 <div className="scroller"></div>
-            </div>
+            </div>}
         </div>}
         <Content transition={transition} />
     </section>

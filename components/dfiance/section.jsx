@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import { Loader } from '../loader';
 
 
+
 function setCoordinates(x = window.innerWidth / 2, y = window.innerHeight / 2) {
     Object.assign(document.documentElement, {
         style: `

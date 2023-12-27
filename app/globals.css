@@ -8,7 +8,7 @@
   --base-board: 650px;
   --project-card: 300px;
   --index: calc(1vw + 1vh);
-  --explorer-ovelay: rgba(255, 255, 255, 0.95);
+  --explorer-ovelay: rgba(255, 255, 255, 0.9);
 }
 
 body {
@@ -18,6 +18,10 @@ body {
   overflow: hidden;
   /* overflow-y: hidden;
   overflow-x: hidden; */
+}
+
+.mobile-only {
+  display: none;
 }
 
 .nomobile,
@@ -739,7 +743,7 @@ button {
   top: unset;
   right: unset;
   left: 50%;
-  transform: translateX(-45%) translateZ(140px);
+  transform: translateX(-50%) translateZ(140px);
   background: unset;
   display: flex;
   flex-direction: column;
@@ -1170,6 +1174,7 @@ button {
   box-sizing: content-box;
   cursor: pointer;
 }
+
 .scroller {
   width: 3px;
   height: 10px;
@@ -1309,6 +1314,7 @@ button {
 
 ul.social {
   display: flex;
+  align-items: center;
   margin: 0 0 auto auto;
 }
 

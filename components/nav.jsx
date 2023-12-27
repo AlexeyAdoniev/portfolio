@@ -1,15 +1,16 @@
+"use client"
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import gsap from "gsap";
 
-
+import { MOBILE } from '@/utils';
 
 import { setAbout, setBoardVisibility } from '@/services/store';
 
 const ANIMATION_DURATION = 1000
-const MOBILE = window.innerWidth <= 800;
 
 export const Nav = () => {
+
 
     const dispatch = useDispatch()
     const showAbout = useSelector(state => state.global.showAbout)

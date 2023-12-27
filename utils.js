@@ -156,8 +156,15 @@ export const COLORS = {
 
 export const letterByLetter = (
   text,
-  { duration = 0.2, delay = 0.02, initialDelay = 0, color = "white" } = {}
+  {
+    duration = 0.2,
+    delay = 0.02,
+    initialDelay = 0,
+    color = "white",
+    nomobile = false,
+  } = {}
 ) => {
+  if (nomobile) return text;
   const id = Math.random();
   let afterSlash = false;
   return text
@@ -184,3 +191,6 @@ export const letterByLetter = (
       })
     : "";
 };
+
+export const MOBILE =
+  typeof window != "undefined" ? window.innerWidth <= 800 : false;

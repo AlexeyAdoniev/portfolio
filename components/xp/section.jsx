@@ -6,6 +6,8 @@ import gsap from 'gsap'
 
 import { Loader } from '../loader.jsx';
 
+import { MOBILE } from '@/utils.js';
+
 
 const { Draggable } = require('./Draggable.min.js')
 const { InertiaPlugin } = require('./InertiaPlugin.min.js')
@@ -14,6 +16,11 @@ const montserratBold = Montserrat({ subsets: ["latin"], weight: "700" });
 
 const adaptToScreen = () => {
     switch (true) {
+
+        case window.innerWidth < 800: {
+            return 15
+        }
+
         case window.innerWidth < 1600: {
             return 10
         }
@@ -45,7 +52,7 @@ const XP = ({ transition }) => {
             draggable.current = Draggable.create('.gallery', {
                 bounds: '.xpSection__container',
                 inertia: true,
-                dragResistance: .5,
+                dragResistance: MOBILE ? .2 : .5,
             })
 
 
@@ -73,7 +80,7 @@ const XP = ({ transition }) => {
             }, {
                 root: null,
                 rootMargin: `-${adaptToScreen()}%`,
-                threshold: 1.0
+                threshold: 1
 
             })
 

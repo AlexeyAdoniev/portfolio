@@ -5,6 +5,7 @@ import { setSignatures } from '@/services/store'
 
 import classNames from 'classnames';
 
+import { MOBILE } from '@/utils';
 
 const OFFSET = 8;
 
@@ -39,7 +40,7 @@ const SignatureList = () => {
 
             const itemSize = document.querySelector('.signatureContainer').getBoundingClientRect().height;
 
-            const signatureLimit = cotainerHeight * .8;
+            const signatureLimit = cotainerHeight * (MOBILE ? .5 : .8);
 
             const signaturesHeight = itemSize * data.length - OFFSET * data.length;
 

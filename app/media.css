@@ -340,7 +340,9 @@
   }
 
   .board aside {
-    display: none;
+    top: 260px;
+    padding-top: 0;
+    height: unset;
   }
 
   .about-content {
@@ -462,6 +464,28 @@
 
   .scence__contaier .overlay .overlay__text br {
     display: none;
+  }
+
+  .xpSection .gallery {
+    column-width: 5vw;
+    gap: 1vw;
+    width: 30vw;
+  }
+
+  .xpSection {
+    overflow: hidden;
+  }
+
+  .xpSection.visible h2 p {
+    font-size: 14px;
+  }
+  .xpSection.visible h2 {
+    width: 230px;
+  }
+
+  .xpVisitBtn {
+    font-size: calc(var(--index) * 1);
+    margin-top: 10px;
   }
 }
 

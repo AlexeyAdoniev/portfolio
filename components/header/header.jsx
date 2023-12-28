@@ -107,7 +107,7 @@ function Header() {
 }
 
 export default () => {
-    const [showLoader, setLoader] = useState(false)
+    const [showLoader, setLoader] = useState(true)
 
     const serviceContainer = {
         _snake: { init },

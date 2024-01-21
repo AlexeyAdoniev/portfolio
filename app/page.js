@@ -1,14 +1,19 @@
-import Header from "@/components/header/header";
-import ProjectDemo from "@/components/demo";
-import { NoMobile } from "@/components/nomobile";
+import Header from '@/components/header/header';
+import ProjectDemo from '@/components/demo';
+import { NoMobile } from '@/components/nomobile';
+import { iOS } from '@/utils';
 
 export default function Home() {
-  return (
-    <>
-      <div className="app">
-        <Header />
-        <ProjectDemo />
-        {/* {false && (
+	return (
+		<>
+			<div
+				className={`app ${
+					iOS(typeof window !== 'undefined' && window) ? 'ios' : ''
+				}`}
+			>
+				<Header />
+				<ProjectDemo />
+				{/* {false && (
           <section style={{ height: "200vh" }}>
             {false && (
               <a
@@ -20,10 +25,10 @@ export default function Home() {
             )}
           </section>
         )} */}
-      </div>
-      <div className="nomobile">
-        <NoMobile />
-      </div>
-    </>
-  );
+			</div>
+			<div className="nomobile">
+				<NoMobile />
+			</div>
+		</>
+	);
 }

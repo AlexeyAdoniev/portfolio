@@ -1,15 +1,13 @@
 import Header from '@/components/header/header';
 import ProjectDemo from '@/components/demo';
 import { NoMobile } from '@/components/nomobile';
-import { iOS } from '@/utils';
+//import { iOS } from '@/utils';
 
 export default function Home() {
 	return (
 		<>
 			<div
-				className={`app ${
-					iOS(typeof window !== 'undefined' && window) ? 'ios' : ''
-				}`}
+				className={`app ios`}
 			>
 				<Header />
 				<ProjectDemo />
